@@ -97,7 +97,6 @@ textarea {
 
 .heading-sm {
   font-size: 2.2rem;
-  text-transform: uppercase;
   letter-spacing: 1px; }
 
 .main-container {
@@ -143,8 +142,8 @@ textarea {
   color: rgb(135, 135, 135);
 }
 .btn.btn--med.btn--theme.dynamicBgClr:hover {
-  box-shadow: 0 0 30px 10px #F8FFAD;
-  color: #F8FFAD;
+  background: #F8FFAD;
+  color: #2f2f2c;
 }
 .btn.btn--med.btn--theme.dynamicBgClr.archive:hover {
   box-shadow: 0 0 30px 10px #303128;
@@ -240,25 +239,30 @@ textarea {
     text-align: center; }
 
 .about {
-  background: #fafafa; }
+  background: #fafafa; 
+}
   .about__content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10rem; }
+    grid-gap: 6rem; }
     @media only screen and (max-width: 56.25em) {
       .about__content {
         grid-template-columns: 1fr;
         grid-gap: 8rem; } }
     .about__content-title {
-      font-weight: 700;
-      font-size: 2.8rem;
-      margin-bottom: 3rem; }
+      margin-bottom: 3rem; 
+      color: black; 
+      font-size: 4rem; 
+      font-family: DM Serif Text; 
+      font-weight: 600; 
+      word-wrap: break-word
+    }
       @media only screen and (max-width: 37.5em) {
         .about__content-title {
           font-size: 2.4rem; } }
     .about__content-details-para {
       font-size: 1.8rem;
-      color: grey;
+      color: rgb(0, 0, 0);
       max-width: 60rem;
       line-height: 1.7;
       margin-bottom: 1rem; }
@@ -268,6 +272,14 @@ textarea {
       .about__content-details-para:last-child {
         margin-bottom: 4rem; }
 
+.about__content-main{
+  width: 110%;
+  margin-left: -8rem;
+}
+.about__content-image{
+  width: 82%;
+  margin-top: 2rem;
+}
 .projects__row {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
@@ -364,7 +376,7 @@ textarea {
     color: #333;
     padding: 2rem;
     width: 100%;
-    border: 1px solid #ebebeb;
+    border: 1px solid #ffffff;
     font-size: 1.6rem;
     letter-spacing: 0px;
     background: #f0f0f0;
@@ -441,6 +453,7 @@ textarea {
     margin-top: 5rem;
     text-align: center; }
 
+    
 .project-details__content {
   padding: 8rem 0;
   max-width: 90rem;
@@ -475,7 +488,7 @@ textarea {
     font-size: 1.8rem;
     line-height: 1.7;
     font-weight: 400;
-    color: grey;
+    color: rgb(49, 49, 49);
     margin-top: 2rem;
     margin-bottom: 2rem; }
 
@@ -567,7 +580,7 @@ textarea {
     transition: color .3s; 
   }
     .header__link:hover {
-      color: #0062b9; }
+      color: rgba(74,82,155,0.9178265056022409); }
     @media only screen and (max-width: 56.25em) {
       .header__link {
         padding: 3rem 1.8rem;
@@ -614,7 +627,7 @@ textarea {
     letter-spacing: 2px;
     transition: color .3s; }
     .header__sm-menu-link a:hover {
-      color: #0062b9; }
+      color: rgba(74,82,155,0.9178265056022409)}
   .header__sm-menu-link:first-child a {
     border-top: 1px solid #eee; }
   .header__sm-menu-link-last {
@@ -700,7 +713,7 @@ textarea {
     font-weight: 500;
     color: #777; }
 
-.mouse {
+/* .mouse {
   width: 25px;
   height: 40px;
   border: 2px solid #eee;
@@ -729,12 +742,64 @@ textarea {
 @-webkit-keyframes wheel {
   to {
     opacity: 0;
-    top: 27px; } }
+    top: 27px; } } */
   
+    .down-arrow {
+      position: absolute;
+      top: calc(95vh - 60px);
+      left: calc(50% - 14px);
+      width: 0;
+      height: 30px;
+      color: grey;
+      /* border: 2px solid; */
+      border-radius: 2px;
+    }
+  
+    .down-arrow:after {
+      content: " ";
+      position: absolute;
+      top: 12px;
+      left: -8px;
+      width: 16px;
+      height: 16px;
+      border-bottom: 2px solid;
+      border-right: 2px solid;
+      border-radius: 2px;
+      transform: rotateZ(45deg);
+    }
+
+    @keyframes jumpInfinite {
+      0% {
+        margin-top: 0;
+      }
+      50% {
+        margin-top: 20px;
+      }
+      100% {
+        margin-top: 0;
+      }
+    }
+    
+    .down-arrow {
+      animation: jumpInfinite 1.5s infinite;
+    }
+
+
 .heading-sec__main.heading-sec__main--lt.archive {
-  color: #7E7E7E;
+  color: grey;
+  font-size: 2rem;
+  font-weight: 400;
+
 }
 
+
+a.squiggly:hover {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23ff9800' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+  background-position: 0 100%;
+  background-size: auto 6px;
+  background-repeat: repeat-x;
+  text-decoration: none;
+}
 
 /* projects-specific css */
 
@@ -836,6 +901,9 @@ textarea {
 .project-details__desc-para.bolded {
   font-weight: 600;
   color: black;
+  font-size: 4rem; 
+  font-family: DM Serif Text; 
+  word-wrap: break-word;
 }
 .project__column .project-details__desc-para.initial-research{
   max-width: 85%;
@@ -868,6 +936,49 @@ textarea {
 .project-details__showcase-img .yxb-overview {
   size: 2rem;
 }
-.project-details__showcase-img-cont.yxb-final-prototype{
-  size: 80%;
+
+.project-details__showcase-img.yxb-skus {
+  margin-left: -2rem;
+  width: 200%;
+}
+
+.project__column .project-details__desc-para.yxb-skus {
+  margin-left: 0rem;
+  width: 90%;
+}
+
+.project-details__showcase-img.yxb-surveying {
+  width: 50%;
+}
+.project-details-overview__column .project-details__showcase-img.spotify-overview {
+  margin-top: 9rem;
+  margin-left: 6rem;
+  width: 120%;
+}
+
+.project-details__showcase-img.spotifyresearch {
+  width: 90%;
+  margin-left: 3rem;
+}
+.project-details__desc-para.spotify-research {
+  width: 110%;
+}
+.project-details__showcase-img.spotifyresearch2 {
+  width: 120%;
+  margin-left: 4rem;
+  margin-top: 8rem;
+}
+.project-details__showcase-img.spotify-final-prototype1 {
+  width: 120%;
+  margin-left: -9rem;
+}
+.project-details__showcase-img.spotify-final-prototype2 {
+  width: 135%;
+  margin-left: -15rem;
+  margin-top: -3.5rem;
+}
+.project-details__showcase-img-cont.spotifyicon {
+  margin-top: 13rem;
+  margin-left: 30rem;
+  width: 40%;
 }
