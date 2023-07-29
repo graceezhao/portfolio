@@ -618,13 +618,11 @@ textarea {
     display: block;
     text-decoration: none;
     padding: 2.5rem 3rem;
-    font-size: 1.6rem;
+    font-size: 2rem;
     color: #333;
     text-align: right;
     border-bottom: 1px solid #eee;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-weight: 400;
     transition: color .3s; }
     .header__sm-menu-link a:hover {
       color: rgba(74,82,155,0.9178265056022409)}
