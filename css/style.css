@@ -619,6 +619,7 @@ textarea {
     text-decoration: none;
     padding: 2.5rem 3rem;
     font-size: 2rem;
+    font-family: 'DM Sans', sans-serif; 
     color: #333;
     text-align: right;
     border-bottom: 1px solid #eee;
