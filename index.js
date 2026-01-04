@@ -130,28 +130,43 @@ if (projectDetailsContent) {
 // Ikebana Interaction
 const ikebanaInteractive = document.querySelector('.ikebana-interactive-wrapper');
 const hero = document.querySelector('.home-hero');
+const ikebanaLeaves = document.querySelectorAll('.ikebana-leaf');
 
 if (ikebanaInteractive && hero) {
   hero.addEventListener('mousemove', (e) => {
     const { clientX, clientY } = e;
     const { left, top, width, height } = hero.getBoundingClientRect();
     
-    // Calculate normalized position (-0.5 to 0.5)
+    // Normalized position (-0.5 to 0.5)
     const x = (clientX - left) / width - 0.5;
     const y = (clientY - top) / height - 0.5;
     
-    // Subtle movement: max 15px translation and 1.5deg rotation
-    const moveX = x * 15;
+    // Group movement
+    const moveX = x * 20;
     const moveY = y * 15;
-    const rotate = x * 1.5;
+    const rotate = x * 2;
     
-    ikebanaInteractive.style.transition = 'transform 0.4s ease-out';
+    ikebanaInteractive.style.transition = 'transform 0.5s cubic-bezier(0.1, 0.5, 0.2, 1)';
     ikebanaInteractive.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${rotate}deg)`;
+
+    // Individual leaf "parallax" for more life
+    ikebanaLeaves.forEach((leaf, index) => {
+      const depth = (index + 1) * 0.5;
+      const lx = x * 15 * depth;
+      const ly = y * 10 * depth;
+      const lr = x * 5 * depth;
+      leaf.style.transform = `translate(${lx}px, ${ly}px) rotate(${lr}deg)`;
+    });
   });
 
   // Reset on mouse leave
   hero.addEventListener('mouseleave', () => {
-    ikebanaInteractive.style.transition = 'transform 1s ease-in-out';
+    ikebanaInteractive.style.transition = 'transform 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
     ikebanaInteractive.style.transform = 'translate(0, 0) rotate(0)';
+    
+    ikebanaLeaves.forEach((leaf) => {
+      leaf.style.transition = 'transform 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
+      leaf.style.transform = 'translate(0, 0) rotate(0)';
+    });
   });
 }

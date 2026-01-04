@@ -72,29 +72,37 @@
         </div>
       </div>
     </header>
-    <section class="home-hero">
-      <div class="ikebana-visual" aria-hidden="true">
-        <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          <g class="ikebana-interactive-wrapper">
-            <g class="ikebana-group">
-              <!-- Stems inspired by the sweeping lines of the reference -->
-              <path class="ikebana-stem ikebana-stem--main" d="M400,600 C400,500 380,350 420,200" />
-              <path class="ikebana-stem ikebana-stem--loop-1" d="M400,600 C300,550 150,450 250,300 C350,150 550,100 650,250 C750,400 600,550 500,580" />
-              <path class="ikebana-stem ikebana-stem--loop-2" d="M400,600 C500,580 650,500 550,350 C450,200 250,250 150,400 C50,550 200,600 300,550" />
-              
-              <!-- Abstracted Anthurium-like forms -->
-              <path class="ikebana-leaf ikebana-leaf--1" d="M420,200 C440,170 480,180 480,220 C480,260 440,280 420,310 C400,280 360,260 360,220 C360,180 400,170 420,200" />
-              <path class="ikebana-leaf ikebana-leaf--2" d="M550,350 C580,320 620,330 620,370 C620,410 580,430 550,460 C520,430 480,410 480,370 C480,330 520,320 550,350" />
-              <path class="ikebana-leaf ikebana-leaf--3" d="M250,300 C230,270 190,280 190,320 C190,360 230,380 250,410 C270,380 310,360 310,320 C310,280 270,270 250,300" />
-              
-              <!-- Smaller accents -->
-              <circle class="ikebana-accent" cx="420" cy="200" r="4" />
-              <circle class="ikebana-accent" cx="550" cy="350" r="3" />
-              <circle class="ikebana-accent" cx="250" cy="300" r="3" />
+      <section class="home-hero">
+        <div class="ikebana-visual" aria-hidden="true">
+          <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="stemGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:var(--ikebana-stem-color);stop-opacity:1" />
+                <stop offset="100%" style="stop-color:var(--ikebana-stem-color);stop-opacity:0.4" />
+              </linearGradient>
+            </defs>
+            <g class="ikebana-interactive-wrapper">
+              <g class="ikebana-group">
+                <!-- Stems with variable weights and depth -->
+                <path class="ikebana-stem ikebana-stem--main" d="M400,600 C400,500 380,350 420,200" style="stroke: url(#stemGradient); stroke-width: 2.5;" />
+                <path class="ikebana-stem ikebana-stem--loop-1" d="M400,600 C300,550 150,450 250,300 C350,150 550,100 650,250 C750,400 600,550 500,580" style="stroke-width: 1.2; opacity: 0.8;" />
+                <path class="ikebana-stem ikebana-stem--loop-2" d="M400,600 C500,580 650,500 550,350 C450,200 250,250 150,400 C50,550 200,600 300,550" style="stroke-width: 0.8; opacity: 0.6;" />
+                <path class="ikebana-stem ikebana-stem--accent" d="M400,600 C420,500 480,450 430,320" style="stroke-width: 0.5; opacity: 0.4;" />
+                
+                <!-- Abstract, organic "petal" forms instead of hearts -->
+                <path class="ikebana-leaf ikebana-leaf--1" d="M420,200 C450,180 490,200 470,240 C450,280 410,270 390,230 C370,190 400,180 420,200" />
+                <path class="ikebana-leaf ikebana-leaf--2" d="M550,350 C590,330 630,360 610,410 C580,450 520,440 500,390 C480,350 510,330 550,350" />
+                <path class="ikebana-leaf ikebana-leaf--3" d="M250,300 C220,270 180,290 190,340 C200,390 260,390 280,340 C290,300 270,280 250,300" />
+                <path class="ikebana-leaf ikebana-leaf--4" d="M430,320 C450,300 480,310 470,340 C460,370 420,360 410,330 C405,310 415,305 430,320" style="opacity: 0.4;" />
+                
+                <!-- Accents -->
+                <circle class="ikebana-accent" cx="420" cy="200" r="3" />
+                <circle class="ikebana-accent" cx="550" cy="350" r="2.5" />
+                <circle class="ikebana-accent" cx="250" cy="300" r="2.5" />
+              </g>
             </g>
-          </g>
-        </svg>
-      </div>
+          </svg>
+        </div>
       <div class="home-hero__content">
         <h1 class="heading-primary"><div style="color: black; font-size: 64px; font-family: DM Serif Text; font-weight: 400; word-wrap: break-word">
             Hi, I’m <strong>Grace!</strong></div></h1>
