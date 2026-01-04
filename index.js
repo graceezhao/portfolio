@@ -126,3 +126,32 @@ if (projectDetailsContent) {
   });
 }
 
+
+// Ikebana Interaction
+const ikebanaInteractive = document.querySelector('.ikebana-interactive-wrapper');
+const hero = document.querySelector('.home-hero');
+
+if (ikebanaInteractive && hero) {
+  hero.addEventListener('mousemove', (e) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = hero.getBoundingClientRect();
+    
+    // Calculate normalized position (-0.5 to 0.5)
+    const x = (clientX - left) / width - 0.5;
+    const y = (clientY - top) / height - 0.5;
+    
+    // Subtle movement: max 15px translation and 1.5deg rotation
+    const moveX = x * 15;
+    const moveY = y * 15;
+    const rotate = x * 1.5;
+    
+    ikebanaInteractive.style.transition = 'transform 0.4s ease-out';
+    ikebanaInteractive.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${rotate}deg)`;
+  });
+
+  // Reset on mouse leave
+  hero.addEventListener('mouseleave', () => {
+    ikebanaInteractive.style.transition = 'transform 1s ease-in-out';
+    ikebanaInteractive.style.transform = 'translate(0, 0) rotate(0)';
+  });
+}

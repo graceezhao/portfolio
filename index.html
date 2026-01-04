@@ -9,7 +9,6 @@
     <meta name="description" content="" />
 
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/ikebana.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk&display=swap" rel="stylesheet">
@@ -74,6 +73,28 @@
       </div>
     </header>
     <section class="home-hero">
+      <div class="ikebana-visual" aria-hidden="true">
+        <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <g class="ikebana-interactive-wrapper">
+            <g class="ikebana-group">
+              <!-- Stems inspired by the sweeping lines of the reference -->
+              <path class="ikebana-stem ikebana-stem--main" d="M400,600 C400,500 380,350 420,200" />
+              <path class="ikebana-stem ikebana-stem--loop-1" d="M400,600 C300,550 150,450 250,300 C350,150 550,100 650,250 C750,400 600,550 500,580" />
+              <path class="ikebana-stem ikebana-stem--loop-2" d="M400,600 C500,580 650,500 550,350 C450,200 250,250 150,400 C50,550 200,600 300,550" />
+              
+              <!-- Abstracted Anthurium-like forms -->
+              <path class="ikebana-leaf ikebana-leaf--1" d="M420,200 C440,170 480,180 480,220 C480,260 440,280 420,310 C400,280 360,260 360,220 C360,180 400,170 420,200" />
+              <path class="ikebana-leaf ikebana-leaf--2" d="M550,350 C580,320 620,330 620,370 C620,410 580,430 550,460 C520,430 480,410 480,370 C480,330 520,320 550,350" />
+              <path class="ikebana-leaf ikebana-leaf--3" d="M250,300 C230,270 190,280 190,320 C190,360 230,380 250,410 C270,380 310,360 310,320 C310,280 270,270 250,300" />
+              
+              <!-- Smaller accents -->
+              <circle class="ikebana-accent" cx="420" cy="200" r="4" />
+              <circle class="ikebana-accent" cx="550" cy="350" r="3" />
+              <circle class="ikebana-accent" cx="250" cy="300" r="3" />
+            </g>
+          </g>
+        </svg>
+      </div>
       <div class="home-hero__content">
         <h1 class="heading-primary"><div style="color: black; font-size: 64px; font-family: DM Serif Text; font-weight: 400; word-wrap: break-word">
             Hi, I’m <strong>Grace!</strong></div></h1>
@@ -92,55 +113,12 @@
                     UiPath</a></div>
           </p>
         </div>
-        </div>
-        <div class="ikebana-container">
-          <svg class="ikebana-svg" viewBox="0 0 500 700" xmlns="http://www.w3.org/2000/svg">
-            <!-- Glass Vase Base (Subtle) -->
-            <rect x="230" y="550" width="40" height="120" rx="5" fill="rgba(200, 200, 200, 0.1)" stroke="rgba(200, 200, 200, 0.2)" stroke-width="1" />
-            
-            <!-- Looping Grass Elements (The 'Heart' shapes) -->
-            <g class="ikebana-sway-group delay-1">
-              <path class="ikebana-stem grass-loop" d="M250,550 C200,400 100,350 150,250 C200,150 350,200 300,350 C270,450 250,550 250,550" />
-            </g>
-            <g class="ikebana-sway-group delay-2">
-              <path class="ikebana-stem grass-loop" d="M250,550 C350,450 450,300 350,150 C250,50 150,150 200,300 C230,400 250,550 250,550" />
-            </g>
+      </div>
+      </div>
+   
 
-            <!-- Broad Dark Leaves at Base -->
-            <g class="ikebana-sway-group delay-1">
-              <path class="ikebana-leaf base-leaf" fill="#2d3a2e" d="M250,550 C230,520 180,500 170,450 C160,400 220,380 250,420 C280,380 340,400 330,450 C320,500 270,520 250,550" />
-            </g>
-
-            <!-- Anthurium 1 (Upper Right - Orange/Yellow) -->
-            <g class="ikebana-interaction-group">
-              <g class="ikebana-sway-group delay-3">
-                <path class="ikebana-stem" d="M250,550 C270,450 350,400 380,250" />
-                <path class="ikebana-flower delay-5" fill="#e69d5e" d="M380,250 C410,220 430,270 380,310 C330,270 350,220 380,250 Z" />
-                <path class="ikebana-spadix delay-5" stroke="#a65d2e" d="M380,250 L395,220" />
-              </g>
-            </g>
-
-            <!-- Anthurium 2 (Middle - Greenish Red) -->
-            <g class="ikebana-interaction-group">
-              <g class="ikebana-sway-group delay-2">
-                <path class="ikebana-stem" d="M250,550 C240,480 280,450 300,380" />
-                <path class="ikebana-flower delay-4" fill="#a4b47c" d="M300,380 C330,350 350,400 300,440 C250,400 270,350 300,380 Z" />
-                <path class="ikebana-spadix delay-4" stroke="#6b4423" d="M300,380 L315,355" />
-              </g>
-            </g>
-
-            <!-- Anthurium 3 (Lower Left - Pale Pink/Green) -->
-            <g class="ikebana-interaction-group">
-              <g class="ikebana-sway-group delay-1">
-                <path class="ikebana-stem" d="M250,550 C200,520 150,500 120,450" />
-                <path class="ikebana-flower delay-3" fill="#d8b4a0" d="M120,450 C90,420 70,470 120,510 C170,470 150,420 120,450 Z" />
-                <path class="ikebana-spadix delay-3" stroke="#8b5a2b" d="M120,450 L105,425" />
-              </g>
-            </g>
-
-          </svg>
-        </div>
-      </section>
+      
+    </section>
     <section id="projects" class="projects sec-pad">
       <div class="main-container">
         <h2 class="heading heading-sec heading-sec__mb-med">
@@ -475,41 +453,40 @@
     </section> -->
 
 
-      <footer class="main-footer">
-        <div class="main-container">
-          <div class="main-footer__lower">
+    <footer class="main-footer">
+      <div class="main-container">
+        <div class="main-footer__lower">
+            <img
+                      src="./assets/GZlogo.png"
+                      alt="Grace Zhao Logo"
+                      class="footer__logo-img"
+                      width = "100px" height = "100px"
+                    />
+          <p class="main-footer__short-desc">
+            Coded with 🍵 ₊ ⊹ 
+            <br>&copy; Grace Zhao 2025</br>
+        </p>
+          <div class="main-footer__social-cont">
+            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/gracezhao001/">
               <img
-                        src="./assets/GZlogo.png"
-                        alt="Grace Zhao Logo"
-                        class="footer__logo-img"
-                        width = "100px" height = "100px"
-                      />
-            <p class="main-footer__short-desc">
-              Coded with 🍵 ₊ ⊹ 
-              <br>&copy; Grace Zhao 2025</br>
-          </p>
-            <div class="main-footer__social-cont">
-              <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/gracezhao001/">
-                <img
-                  class="main-footer__icon"
-                  src="./assets/linkedin.svg"
-                  alt="linkedinicon"
-                />
-              </a>
-              <a target="_blank" rel="noreferrer" href="https://www.instagram.com/_gracezhao_/?hl=en">
-                <img
-                  class="main-footer__icon"
-                  src="./assets/ri_instagram-fill.svg"
-                  alt="instagramicon"
-                />
-              </a>
-            </div>
+                class="main-footer__icon"
+                src="./assets/linkedin.svg"
+                alt="linkedinicon"
+              />
+            </a>
+            <a target="_blank" rel="noreferrer" href="https://www.instagram.com/_gracezhao_/?hl=en">
+              <img
+                class="main-footer__icon"
+                src="./assets/ri_instagram-fill.svg"
+                alt="instagramicon"
+              />
+            </a>
           </div>
-          
         </div>
-      </footer>
-  
-      <script src="index.js"></script>
-      <script src="ikebana.js"></script>
-    </body>
-  </html>
+        
+      </div>
+    </footer>
+
+    <script src="index.js"></script>
+  </body>
+</html>

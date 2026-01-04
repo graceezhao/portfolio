@@ -1157,3 +1157,87 @@ a.squiggly:hover {
 .project__row.scroll-hidden .project__column:nth-child(2) {
   transition-delay: 0.2s;
 }
+/* Ikebana Visual Styles */
+:root {
+  --ikebana-stem-color: #4a5d4e;
+  --ikebana-leaf-1: #C1E1C1;
+  --ikebana-leaf-2: #F4C2C2;
+  --ikebana-leaf-3: #E6E6FA;
+  --ikebana-reveal-duration: 3.5s;
+  --ikebana-sway-duration: 12s;
+}
+
+.ikebana-visual {
+  position: absolute;
+  bottom: 0;
+  right: -5%;
+  width: 60%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.6;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .ikebana-visual {
+    width: 100%;
+    right: 0;
+    opacity: 0.3;
+    justify-content: center;
+  }
+}
+
+.ikebana-visual svg {
+  width: 100%;
+  height: 110%; /* Slightly taller to ensure it covers the bottom area */
+  max-width: 900px;
+}
+
+.ikebana-stem {
+  stroke: var(--ikebana-stem-color);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 2500;
+  stroke-dashoffset: 2500;
+  animation: ikebana-draw var(--ikebana-reveal-duration) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.ikebana-leaf {
+  opacity: 0;
+  transform-origin: center;
+  stroke: none;
+}
+
+.ikebana-leaf--1 { fill: var(--ikebana-leaf-1); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 1s; }
+.ikebana-leaf--2 { fill: var(--ikebana-leaf-2); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 1.5s; }
+.ikebana-leaf--3 { fill: var(--ikebana-leaf-3); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 2s; }
+
+.ikebana-accent {
+  fill: var(--ikebana-stem-color);
+  opacity: 0;
+  animation: ikebana-fade-in 1.5s ease-out forwards;
+  animation-delay: 2.5s;
+}
+
+.ikebana-group {
+  animation: ikebana-sway var(--ikebana-sway-duration) ease-in-out infinite;
+  transform-origin: 400px 600px;
+}
+
+@keyframes ikebana-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes ikebana-fade-in {
+  from { opacity: 0; transform: scale(0.95) translateY(20px); }
+  to { opacity: 0.7; transform: scale(1) translateY(0); }
+}
+
+@keyframes ikebana-sway {
+  0%, 100% { transform: rotate(-0.5deg) translateX(0); }
+  50% { transform: rotate(0.5deg) translateX(10px); }
+}
