@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (container) {
       container.classList.add('is-visible');
     }
-  }, 300);
+  }, 500);
 
-  // Subtle mouse interaction
+  // Subtle mouse interaction (Parallax & Lean)
   if (hero && interactionGroups.length > 0) {
     hero.addEventListener('mousemove', (e) => {
       const { clientX, clientY } = e;
@@ -21,19 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const y = (clientY - top) / height - 0.5;
 
       interactionGroups.forEach((group, index) => {
-        // Different intensity for each group to create depth
-        const factor = (index + 1) * 8; 
+        // Depth factor based on index
+        const factor = (index + 1) * 12; 
         const moveX = x * factor;
-        const moveY = y * factor;
+        const moveY = y * (factor / 2);
         
-        group.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        // Gentle rotation towards mouse position
+        const rotate = x * 2.5;
+        
+        group.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${rotate}deg)`;
       });
     });
 
-    // Reset on mouse leave
+    // Reset on mouse leave with smooth transition
     hero.addEventListener('mouseleave', () => {
       interactionGroups.forEach(group => {
-        group.style.transform = `translate(0, 0)`;
+        group.style.transform = `translate(0, 0) rotate(0deg)`;
       });
     });
   }

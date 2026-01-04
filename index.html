@@ -94,31 +94,50 @@
         </div>
         </div>
         <div class="ikebana-container">
-          <svg class="ikebana-svg" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <!-- Shin (Main Stem) -->
+          <svg class="ikebana-svg" viewBox="0 0 500 700" xmlns="http://www.w3.org/2000/svg">
+            <!-- Glass Vase Base (Subtle) -->
+            <rect x="230" y="550" width="40" height="120" rx="5" fill="rgba(200, 200, 200, 0.1)" stroke="rgba(200, 200, 200, 0.2)" stroke-width="1" />
+            
+            <!-- Looping Grass Elements (The 'Heart' shapes) -->
+            <g class="ikebana-sway-group delay-1">
+              <path class="ikebana-stem grass-loop" d="M250,550 C200,400 100,350 150,250 C200,150 350,200 300,350 C270,450 250,550 250,550" />
+            </g>
+            <g class="ikebana-sway-group delay-2">
+              <path class="ikebana-stem grass-loop" d="M250,550 C350,450 450,300 350,150 C250,50 150,150 200,300 C230,400 250,550 250,550" />
+            </g>
+
+            <!-- Broad Dark Leaves at Base -->
+            <g class="ikebana-sway-group delay-1">
+              <path class="ikebana-leaf base-leaf" fill="#2d3a2e" d="M250,550 C230,520 180,500 170,450 C160,400 220,380 250,420 C280,380 340,400 330,450 C320,500 270,520 250,550" />
+            </g>
+
+            <!-- Anthurium 1 (Upper Right - Orange/Yellow) -->
             <g class="ikebana-interaction-group">
-              <g class="ikebana-sway-group">
-                <path class="ikebana-stem delay-1" d="M200,580 C180,450 150,300 130,120" />
-                <path class="ikebana-petal delay-4" fill="var(--ikebana-petal-lavender)" d="M130,120 C110,100 100,130 130,150 C160,130 150,100 130,120 Z" />
-                <path class="ikebana-petal delay-5" fill="var(--ikebana-petal-white)" d="M145,135 C135,125 125,145 145,155 C165,145 155,125 145,135 Z" />
+              <g class="ikebana-sway-group delay-3">
+                <path class="ikebana-stem" d="M250,550 C270,450 350,400 380,250" />
+                <path class="ikebana-flower delay-5" fill="#e69d5e" d="M380,250 C410,220 430,270 380,310 C330,270 350,220 380,250 Z" />
+                <path class="ikebana-spadix delay-5" stroke="#a65d2e" d="M380,250 L395,220" />
               </g>
             </g>
-            <!-- Soe (Secondary Stem) -->
+
+            <!-- Anthurium 2 (Middle - Greenish Red) -->
             <g class="ikebana-interaction-group">
-              <g class="ikebana-sway-group">
-                <path class="ikebana-stem delay-2" d="M200,580 C230,480 320,400 340,260 C350,180 300,150 280,180" />
-                <path class="ikebana-petal delay-3" fill="var(--ikebana-petal-peach)" d="M280,180 C260,160 250,190 280,210 C310,190 300,160 280,180 Z" />
+              <g class="ikebana-sway-group delay-2">
+                <path class="ikebana-stem" d="M250,550 C240,480 280,450 300,380" />
+                <path class="ikebana-flower delay-4" fill="#a4b47c" d="M300,380 C330,350 350,400 300,440 C250,400 270,350 300,380 Z" />
+                <path class="ikebana-spadix delay-4" stroke="#6b4423" d="M300,380 L315,355" />
               </g>
             </g>
-            <!-- Hikae (Tertiary Stem) -->
+
+            <!-- Anthurium 3 (Lower Left - Pale Pink/Green) -->
             <g class="ikebana-interaction-group">
-              <g class="ikebana-sway-group">
-                <path class="ikebana-stem delay-3" d="M200,580 C150,550 100,480 80,420" />
-                <path class="ikebana-petal delay-2" fill="var(--ikebana-leaf-green)" d="M80,420 C60,400 50,430 80,450 C110,430 100,400 80,420 Z" />
+              <g class="ikebana-sway-group delay-1">
+                <path class="ikebana-stem" d="M250,550 C200,520 150,500 120,450" />
+                <path class="ikebana-flower delay-3" fill="#d8b4a0" d="M120,450 C90,420 70,470 120,510 C170,470 150,420 120,450 Z" />
+                <path class="ikebana-spadix delay-3" stroke="#8b5a2b" d="M120,450 L105,425" />
               </g>
             </g>
-            <!-- Subtle base -->
-            <path fill="var(--ikebana-stem-color)" opacity="0.2" d="M180,580 L220,580 L210,595 L190,595 Z" />
+
           </svg>
         </div>
       </section>
