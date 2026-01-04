@@ -103,6 +103,13 @@ textarea {
   max-width: 120rem;
   margin: auto;
   width: 92%; }
+  @media only screen and (min-width: 75em) {
+    .main-container {
+      width: 88%; } }
+  @media only screen and (min-width: 112.5em) {
+    .main-container {
+      width: 82%;
+      max-width: 110rem; } }
 
 .btn1{
   background: #fff;
@@ -341,6 +348,9 @@ textarea {
     width: 95%;
     border-radius: 5px;
     margin: 5rem auto 0 auto; }
+    @media only screen and (min-width: 112.5em) {
+      .contact__form-container {
+        max-width: 70rem; } }
     @media only screen and (max-width: 37.5em) {
       .contact__form-container {
         padding: 3rem; } }
@@ -425,6 +435,10 @@ textarea {
     max-width: 110rem;
     width: 92%;
     margin: auto; }
+    @media only screen and (min-width: 112.5em) {
+      .project-cs-hero__content {
+        max-width: 100rem;
+        width: 82%; } }
     @media only screen and (max-width: 37.5em) {
       .project-cs-hero__content {
         padding: 19rem 0 13rem 0;
@@ -445,7 +459,11 @@ textarea {
   margin: auto; 
   align-items: center;
 }
-  .project-details__content-title {
+  @media only screen and (min-width: 112.5em) {
+    .project-details__content {
+      max-width: 80rem; } }
+
+.project-details__content-title {
     font-weight: 700;
     font-size: 2.8rem;
     margin-bottom: 3rem; }
@@ -466,6 +484,9 @@ textarea {
   margin: auto; 
   margin-left: 0rem;
 }
+  @media only screen and (min-width: 112.5em) {
+    .project-details__content-main {
+      max-width: 110rem; } }
 
 .project-details__desc {
   margin: 0 0 7rem 0; }
