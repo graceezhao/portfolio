@@ -9,6 +9,7 @@
     <meta name="description" content="" />
 
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/ikebana.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk&display=swap" rel="stylesheet">
@@ -91,12 +92,36 @@
                     UiPath</a></div>
           </p>
         </div>
-      </div>
-      </div>
-   
-
-      
-    </section>
+        </div>
+        <div class="ikebana-container">
+          <svg class="ikebana-svg" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+            <!-- Shin (Main Stem) -->
+            <g class="ikebana-interaction-group">
+              <g class="ikebana-sway-group">
+                <path class="ikebana-stem delay-1" d="M200,580 C180,450 150,300 130,120" />
+                <path class="ikebana-petal delay-4" fill="var(--ikebana-petal-lavender)" d="M130,120 C110,100 100,130 130,150 C160,130 150,100 130,120 Z" />
+                <path class="ikebana-petal delay-5" fill="var(--ikebana-petal-white)" d="M145,135 C135,125 125,145 145,155 C165,145 155,125 145,135 Z" />
+              </g>
+            </g>
+            <!-- Soe (Secondary Stem) -->
+            <g class="ikebana-interaction-group">
+              <g class="ikebana-sway-group">
+                <path class="ikebana-stem delay-2" d="M200,580 C230,480 320,400 340,260 C350,180 300,150 280,180" />
+                <path class="ikebana-petal delay-3" fill="var(--ikebana-petal-peach)" d="M280,180 C260,160 250,190 280,210 C310,190 300,160 280,180 Z" />
+              </g>
+            </g>
+            <!-- Hikae (Tertiary Stem) -->
+            <g class="ikebana-interaction-group">
+              <g class="ikebana-sway-group">
+                <path class="ikebana-stem delay-3" d="M200,580 C150,550 100,480 80,420" />
+                <path class="ikebana-petal delay-2" fill="var(--ikebana-leaf-green)" d="M80,420 C60,400 50,430 80,450 C110,430 100,400 80,420 Z" />
+              </g>
+            </g>
+            <!-- Subtle base -->
+            <path fill="var(--ikebana-stem-color)" opacity="0.2" d="M180,580 L220,580 L210,595 L190,595 Z" />
+          </svg>
+        </div>
+      </section>
     <section id="projects" class="projects sec-pad">
       <div class="main-container">
         <h2 class="heading heading-sec heading-sec__mb-med">
@@ -431,40 +456,41 @@
     </section> -->
 
 
-    <footer class="main-footer">
-      <div class="main-container">
-        <div class="main-footer__lower">
-            <img
-                      src="./assets/GZlogo.png"
-                      alt="Grace Zhao Logo"
-                      class="footer__logo-img"
-                      width = "100px" height = "100px"
-                    />
-          <p class="main-footer__short-desc">
-            Coded with 🍵 ₊ ⊹ 
-            <br>&copy; Grace Zhao 2025</br>
-        </p>
-          <div class="main-footer__social-cont">
-            <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/gracezhao001/">
+      <footer class="main-footer">
+        <div class="main-container">
+          <div class="main-footer__lower">
               <img
-                class="main-footer__icon"
-                src="./assets/linkedin.svg"
-                alt="linkedinicon"
-              />
-            </a>
-            <a target="_blank" rel="noreferrer" href="https://www.instagram.com/_gracezhao_/?hl=en">
-              <img
-                class="main-footer__icon"
-                src="./assets/ri_instagram-fill.svg"
-                alt="instagramicon"
-              />
-            </a>
+                        src="./assets/GZlogo.png"
+                        alt="Grace Zhao Logo"
+                        class="footer__logo-img"
+                        width = "100px" height = "100px"
+                      />
+            <p class="main-footer__short-desc">
+              Coded with 🍵 ₊ ⊹ 
+              <br>&copy; Grace Zhao 2025</br>
+          </p>
+            <div class="main-footer__social-cont">
+              <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/gracezhao001/">
+                <img
+                  class="main-footer__icon"
+                  src="./assets/linkedin.svg"
+                  alt="linkedinicon"
+                />
+              </a>
+              <a target="_blank" rel="noreferrer" href="https://www.instagram.com/_gracezhao_/?hl=en">
+                <img
+                  class="main-footer__icon"
+                  src="./assets/ri_instagram-fill.svg"
+                  alt="instagramicon"
+                />
+              </a>
+            </div>
           </div>
+          
         </div>
-        
-      </div>
-    </footer>
-
-    <script src="index.js"></script>
-  </body>
-</html>
+      </footer>
+  
+      <script src="index.js"></script>
+      <script src="ikebana.js"></script>
+    </body>
+  </html>
