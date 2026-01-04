@@ -1159,24 +1159,28 @@ a.squiggly:hover {
 }
 /* Ikebana Visual Styles */
 :root {
-  --ikebana-stem-color: #4a5d4e;
-  --ikebana-leaf-1: #C1E1C1;
-  --ikebana-leaf-2: #F4C2C2;
-  --ikebana-leaf-3: #E6E6FA;
-  --ikebana-reveal-duration: 4s;
-  --ikebana-sway-duration: 15s;
+  --ikebana-stem-light: #a8b5a0;
+  --ikebana-stem-mid: #8a9a82;
+  --ikebana-stem-dark: #7a8a72;
+  --ikebana-leaf-1: #e8ebe5;
+  --ikebana-leaf-2: #f0e6e8;
+  --ikebana-leaf-3: #e6e8f0;
+  --ikebana-leaf-4: #eae8e0;
+  --ikebana-leaf-5: #e5ebe8;
+  --ikebana-reveal-duration: 4.5s;
+  --ikebana-sway-duration: 18s;
 }
 
 .ikebana-visual {
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: 55%;
   transform: translateX(-50%);
-  width: 90%;
+  width: 95%;
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.65;
+  opacity: 0.7;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -1184,53 +1188,56 @@ a.squiggly:hover {
 
 @media only screen and (max-width: 56.25em) {
   .ikebana-visual {
-    width: 120%;
-    opacity: 0.4;
+    width: 130%;
+    left: 50%;
+    opacity: 0.35;
   }
 }
 
 .ikebana-visual svg {
   width: 100%;
-  height: 110%;
-  max-width: 1000px;
+  height: 115%;
+  max-width: 1100px;
 }
 
 .ikebana-stem {
-  stroke: var(--ikebana-stem-color);
   fill: none;
   stroke-linecap: round;
-  stroke-dasharray: 3000;
-  stroke-dashoffset: 3000;
+  stroke-dasharray: 3500;
+  stroke-dashoffset: 3500;
   animation: ikebana-draw var(--ikebana-reveal-duration) cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-.ikebana-stem--main { animation-delay: 0.2s; }
-.ikebana-stem--loop-1 { animation-delay: 0.4s; }
-.ikebana-stem--loop-2 { animation-delay: 0.6s; }
-.ikebana-stem--accent { animation-delay: 0.8s; }
+.ikebana-stem--main { animation-delay: 0.1s; }
+.ikebana-stem--loop-1 { animation-delay: 0.3s; }
+.ikebana-stem--loop-2 { animation-delay: 0.5s; }
+.ikebana-stem--accent { animation-delay: 0.7s; }
+.ikebana-stem--fine { animation-delay: 0.9s; }
 
 .ikebana-leaf {
   opacity: 0;
   transform-origin: center;
   stroke: none;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
 }
 
-.ikebana-leaf--1 { fill: var(--ikebana-leaf-1); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 1.5s; }
-.ikebana-leaf--2 { fill: var(--ikebana-leaf-2); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 2.2s; }
-.ikebana-leaf--3 { fill: var(--ikebana-leaf-3); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 2.8s; }
-.ikebana-leaf--4 { fill: var(--ikebana-leaf-1); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 3.2s; }
+.ikebana-leaf--1 { fill: var(--ikebana-leaf-1); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 1.8s; }
+.ikebana-leaf--2 { fill: var(--ikebana-leaf-2); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 2.4s; }
+.ikebana-leaf--3 { fill: var(--ikebana-leaf-3); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 3s; }
+.ikebana-leaf--4 { fill: var(--ikebana-leaf-4); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 3.4s; }
+.ikebana-leaf--5 { fill: var(--ikebana-leaf-5); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 3.8s; }
 
 .ikebana-accent {
-  fill: var(--ikebana-stem-color);
   opacity: 0;
-  animation: ikebana-fade-in 2s ease-out forwards;
-  animation-delay: 3.5s;
+  animation: ikebana-fade-in 2.5s ease-out forwards;
 }
+.ikebana-accent--1 { fill: var(--ikebana-stem-mid); animation-delay: 4s; }
+.ikebana-accent--2 { fill: var(--ikebana-stem-light); animation-delay: 4.2s; }
+.ikebana-accent--3 { fill: var(--ikebana-stem-mid); animation-delay: 4.4s; }
 
 .ikebana-group {
   animation: ikebana-sway var(--ikebana-sway-duration) ease-in-out infinite;
-  transform-origin: 400px 600px;
+  transform-origin: 480px 620px;
 }
 
 @keyframes ikebana-draw {
@@ -1240,15 +1247,15 @@ a.squiggly:hover {
 @keyframes ikebana-fade-in {
   from { 
     opacity: 0; 
-    transform: scale(0.8) translateY(30px) rotate(-5deg); 
+    transform: scale(0.85) translateY(25px) rotate(-3deg); 
   }
   to { 
-    opacity: 0.75; 
+    opacity: 0.8; 
     transform: scale(1) translateY(0) rotate(0); 
   }
 }
 
 @keyframes ikebana-sway {
-  0%, 100% { transform: rotate(-0.8deg) translateX(-5px); }
-  50% { transform: rotate(0.8deg) translateX(5px); }
+  0%, 100% { transform: rotate(-0.6deg) translateX(-4px); }
+  50% { transform: rotate(0.6deg) translateX(4px); }
 }
