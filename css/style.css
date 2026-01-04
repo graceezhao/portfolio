@@ -208,118 +208,17 @@ textarea {
     }
   }
 
-.about-hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: #fafafa;
-}
-
-.about__content--centered {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  z-index: 1;
-  position: relative;
-  max-width: 80rem;
-  margin: 0 auto;
-}
-
-.about__content--centered .about__content-main {
-  width: 100%;
-  margin-left: 0;
-}
-
-.about__content--centered .about__content-details-para {
-  margin: 0 auto 1rem auto;
-}
-
-.ikebana-about-visual {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ikebana-about-visual svg {
-  width: 100%;
-  height: 100%;
-  max-width: 1200px;
-}
-
-.ikebana-about-stem {
-  fill: none;
-  stroke-linecap: round;
-  stroke-dasharray: 2000;
-  stroke-dashoffset: 2000;
-  animation: ikebana-draw 3.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-.ikebana-about-leaf {
-  opacity: 0;
-  transform-origin: center;
-  fill: #e8e4e1;
-  animation: ikebana-fade-in 3s ease-out forwards;
-}
-
-.ikebana-about-leaf--1 { animation-delay: 1.2s; }
-.ikebana-about-leaf--2 { animation-delay: 1.8s; }
-.ikebana-about-leaf--3 { animation-delay: 2.2s; }
-
-.ikebana-about-accent {
-  opacity: 0;
-  fill: #dcd4cc;
-  animation: ikebana-fade-in 2s ease-out forwards;
-  animation-delay: 2.5s;
-}
-
-.ikebana-about-group {
-  animation: ikebana-sway-slow 22s ease-in-out infinite;
-  transform-origin: 400px 650px;
-}
-
-@keyframes ikebana-sway-slow {
-  0%, 100% { transform: rotate(-1.2deg) translateX(-10px); }
-  50% { transform: rotate(1.2deg) translateX(10px); }
-}
-
-@keyframes ikebana-draw {
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes ikebana-fade-in {
-  from { 
-    opacity: 0; 
-    transform: scale(0.8) translateY(20px); 
-  }
-  to { 
-    opacity: 0.6; 
-    transform: scale(1) translateY(0); 
-  }
-}
-
 .about {
   background: #fafafa; 
 }
   .about__content {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    grid-gap: 0rem; }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
     @media only screen and (max-width: 56.25em) {
       .about__content {
-        grid-template-columns: 1fr;
-        grid-gap: 3rem;
         word-wrap: break-word } }
     .about__content-title {
       margin-bottom: 3rem; 
@@ -337,7 +236,10 @@ textarea {
       color: rgb(0, 0, 0);
       max-width: 60rem;
       line-height: 1.7;
-      margin-bottom: 1rem; }
+      margin-bottom: 1rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
       .about__content-details-para--hl {
         font-weight: 700;
         margin: 0 3px; }
@@ -345,8 +247,7 @@ textarea {
         margin-bottom: 4rem; }
 
 .about__content-main{
-  width: 110%;
-  /* margin-left: -8rem; */
+  width: 100%;
 }
 .about__content-image{
   width: 80%;

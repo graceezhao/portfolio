@@ -187,77 +187,8 @@ if (ikebanaInteractive && hero) {
     targetY = (clientY - top) / height - 0.5;
   });
 
-    hero.addEventListener('mouseleave', () => {
-      targetX = 0;
-      targetY = 0;
-    });
-  }
-}
-
-// About Page Ikebana Interaction
-const aboutIkebanaInteractive = document.querySelector('.ikebana-about-interactive-wrapper');
-const aboutHero = document.querySelector('.about-hero');
-const aboutLeaves = document.querySelectorAll('.ikebana-about-leaf');
-const aboutStems = document.querySelectorAll('.ikebana-about-stem');
-const aboutAccents = document.querySelectorAll('.ikebana-about-accent');
-
-if (aboutIkebanaInteractive && aboutHero) {
-  let aTargetX = 0, aTargetY = 0;
-  let aCurrentX = 0, aCurrentY = 0;
-
-  function lerp(start, end, factor) {
-    return start + (end - start) * factor;
-  }
-
-  function animateAboutIkebana() {
-    aCurrentX = lerp(aCurrentX, aTargetX, 0.04); // Slower, more fluid lerp
-    aCurrentY = lerp(aCurrentY, aTargetY, 0.04);
-
-    const moveX = aCurrentX * 45; // Wider movement range
-    const moveY = aCurrentY * 30;
-    const rotate = aCurrentX * 4;
-
-    aboutIkebanaInteractive.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${rotate}deg)`;
-
-    aboutLeaves.forEach((leaf, index) => {
-      const depth = 0.4 + (index * 0.25);
-      const lx = aCurrentX * 35 * depth;
-      const ly = aCurrentY * 25 * depth;
-      const lr = aCurrentX * 12 * depth;
-      const scale = 1 + Math.abs(aCurrentX) * 0.08 * depth;
-      leaf.style.transform = `translate(${lx}px, ${ly}px) rotate(${lr}deg) scale(${scale})`;
-      leaf.style.opacity = 0.5 + Math.abs(aCurrentX) * 0.3; // Responsive opacity
-    });
-
-    aboutStems.forEach((stem, index) => {
-      const depth = 0.3 + (index * 0.2);
-      const strokeWidth = 1.2 + Math.abs(aCurrentX) * 0.5 * depth;
-      stem.style.strokeWidth = strokeWidth;
-    });
-
-    aboutAccents.forEach((accent, index) => {
-      const depth = 0.7 + (index * 0.15);
-      const ax = aCurrentX * 22 * depth;
-      const ay = aCurrentY * 15 * depth;
-      accent.style.transform = `translate(${ax}px, ${ay}px)`;
-    });
-
-    requestAnimationFrame(animateAboutIkebana);
-  }
-
-  animateAboutIkebana();
-
-  aboutHero.addEventListener('mousemove', (e) => {
-    const { clientX, clientY } = e;
-    const { left, top, width, height } = aboutHero.getBoundingClientRect();
-    
-    aTargetX = (clientX - left) / width - 0.5;
-    aTargetY = (clientY - top) / height - 0.5;
-  });
-
-  aboutHero.addEventListener('mouseleave', () => {
-    aTargetX = 0;
-    aTargetY = 0;
+  hero.addEventListener('mouseleave', () => {
+    targetX = 0;
+    targetY = 0;
   });
 }
-
