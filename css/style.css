@@ -1159,14 +1159,12 @@ a.squiggly:hover {
 }
 /* Ikebana Visual Styles */
 :root {
-  --ikebana-stem-light: #a8b5a0;
-  --ikebana-stem-mid: #8a9a82;
-  --ikebana-stem-dark: #7a8a72;
-  --ikebana-leaf-1: #e8ebe5;
-  --ikebana-leaf-2: #f0e6e8;
-  --ikebana-leaf-3: #e6e8f0;
-  --ikebana-leaf-4: #eae8e0;
-  --ikebana-leaf-5: #e5ebe8;
+  --ikebana-stem-light: #c8d4c0;
+  --ikebana-stem-mid: #b0c0a8;
+  --ikebana-accent-color: #d5ddd0;
+  --ikebana-leaf-1: #f0f2ed;
+  --ikebana-leaf-2: #f5eff1;
+  --ikebana-leaf-3: #eef0f5;
   --ikebana-reveal-duration: 4.5s;
   --ikebana-sway-duration: 18s;
 }
@@ -1184,6 +1182,11 @@ a.squiggly:hover {
   display: flex;
   align-items: flex-end;
   justify-content: center;
+}
+
+.home-hero__content {
+  position: relative;
+  z-index: 1;
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -1224,16 +1227,14 @@ a.squiggly:hover {
 .ikebana-leaf--1 { fill: var(--ikebana-leaf-1); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 1.8s; }
 .ikebana-leaf--2 { fill: var(--ikebana-leaf-2); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 2.4s; }
 .ikebana-leaf--3 { fill: var(--ikebana-leaf-3); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 3s; }
-.ikebana-leaf--4 { fill: var(--ikebana-leaf-4); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 3.4s; }
-.ikebana-leaf--5 { fill: var(--ikebana-leaf-5); animation: ikebana-fade-in var(--ikebana-reveal-duration) ease-out forwards; animation-delay: 3.8s; }
 
 .ikebana-accent {
   opacity: 0;
   animation: ikebana-fade-in 2.5s ease-out forwards;
 }
-.ikebana-accent--1 { fill: var(--ikebana-stem-mid); animation-delay: 4s; }
+.ikebana-accent--1 { fill: var(--ikebana-accent-color); animation-delay: 4s; }
 .ikebana-accent--2 { fill: var(--ikebana-stem-light); animation-delay: 4.2s; }
-.ikebana-accent--3 { fill: var(--ikebana-stem-mid); animation-delay: 4.4s; }
+.ikebana-accent--3 { fill: var(--ikebana-accent-color); animation-delay: 4.4s; }
 
 .ikebana-group {
   animation: ikebana-sway var(--ikebana-sway-duration) ease-in-out infinite;

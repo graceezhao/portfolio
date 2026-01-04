@@ -132,6 +132,7 @@ const ikebanaInteractive = document.querySelector('.ikebana-interactive-wrapper'
 const hero = document.querySelector('.home-hero');
 const ikebanaLeaves = document.querySelectorAll('.ikebana-leaf');
 const ikebanaStems = document.querySelectorAll('.ikebana-stem');
+const ikebanaAccents = document.querySelectorAll('.ikebana-accent');
 
 if (ikebanaInteractive && hero) {
   let targetX = 0, targetY = 0;
@@ -142,28 +143,35 @@ if (ikebanaInteractive && hero) {
   }
 
   function animateIkebana() {
-    currentX = lerp(currentX, targetX, 0.08);
-    currentY = lerp(currentY, targetY, 0.08);
+    currentX = lerp(currentX, targetX, 0.06);
+    currentY = lerp(currentY, targetY, 0.06);
 
-    const moveX = currentX * 25;
-    const moveY = currentY * 18;
-    const rotate = currentX * 2.5;
+    const moveX = currentX * 30;
+    const moveY = currentY * 22;
+    const rotate = currentX * 3;
 
     ikebanaInteractive.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${rotate}deg)`;
 
     ikebanaLeaves.forEach((leaf, index) => {
-      const depth = 0.4 + (index * 0.25);
-      const lx = currentX * 20 * depth;
-      const ly = currentY * 15 * depth;
-      const lr = currentX * 8 * depth;
-      const scale = 1 + Math.abs(currentX) * 0.03 * depth;
+      const depth = 0.5 + (index * 0.3);
+      const lx = currentX * 25 * depth;
+      const ly = currentY * 18 * depth;
+      const lr = currentX * 10 * depth;
+      const scale = 1 + Math.abs(currentX) * 0.05 * depth;
       leaf.style.transform = `translate(${lx}px, ${ly}px) rotate(${lr}deg) scale(${scale})`;
     });
 
     ikebanaStems.forEach((stem, index) => {
       const depth = 0.2 + (index * 0.15);
-      const opacity = 0.6 + Math.abs(currentX) * 0.3 * depth;
+      const opacity = 0.5 + Math.abs(currentX) * 0.4 * depth;
       stem.style.opacity = Math.min(opacity, 1);
+    });
+
+    ikebanaAccents.forEach((accent, index) => {
+      const depth = 0.6 + (index * 0.2);
+      const ax = currentX * 18 * depth;
+      const ay = currentY * 12 * depth;
+      accent.style.transform = `translate(${ax}px, ${ay}px)`;
     });
 
     requestAnimationFrame(animateIkebana);
