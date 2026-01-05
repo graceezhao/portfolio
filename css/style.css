@@ -1314,12 +1314,9 @@ a, button, input, textarea, [role="button"] {
 .hero-carousel {
   position: relative;
   width: 100%;
-  max-width: 120rem;
   margin: 0 auto 6rem auto;
   overflow: hidden;
-  border-radius: 8px;
-  height: 40rem;
-  background-color: #f5f5f5;
+  height: 50rem;
   cursor: grab;
 }
 
@@ -1337,13 +1334,12 @@ a, button, input, textarea, [role="button"] {
 .hero-carousel__slide {
   min-width: 45%;
   width: 45%;
-  height: 96%;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
   flex-shrink: 0;
   transition: opacity 0.4s ease, transform 0.4s ease;
   opacity: 0.4;
   transform: scale(0.9);
-  border-radius: 8px;
   margin: 0 0.4rem;
 }
 
