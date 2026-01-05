@@ -1335,8 +1335,8 @@ a, button, input, textarea, [role="button"] {
 }
 
 .hero-carousel__slide {
-  min-width: 60%;
-  width: 60%;
+  min-width: 45%;
+  width: 45%;
   height: 96%;
   object-fit: cover;
   flex-shrink: 0;
@@ -1344,7 +1344,7 @@ a, button, input, textarea, [role="button"] {
   opacity: 0.4;
   transform: scale(0.9);
   border-radius: 8px;
-  margin: 0 1rem;
+  margin: 0 0.4rem;
 }
 
 .hero-carousel__slide.active {

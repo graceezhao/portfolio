@@ -202,20 +202,17 @@ if (heroCarousel) {
 
   const dots = dotsContainer.querySelectorAll('.hero-carousel__dot');
 
-  function updateCarousel() {
-    // Calculate centering offset
-    // Slide width is 60%, container is 100%. 
-    // To center: (100% - 60%) / 2 = 20%
-    const slideWidth = 60; // percent
-    const offset = 20; // percent to center
-    
-    // We also have 1rem margin on each side of the slide.
-    // In many cases, it's easier to just use the slide's bounding rect if we want to be pixel perfect,
-    // but for a simple responsive carousel, percentages are usually fine.
-    // However, 1rem is absolute. Let's try to stick to a consistent approach.
-    
-    const translateValue = offset - (currentIndex * (slideWidth + 2)); // +2 for margins roughly in %
-    track.style.transform = `translateX(${translateValue}%)`;
+    function updateCarousel() {
+      // Calculate centering offset
+      // Slide width is 45%, container is 100%. 
+      // To center: (100% - 45%) / 2 = 27.5%
+      const slideWidth = 45; // percent
+      const offset = 27.5; // percent to center
+      
+      // We also have 0.4rem margin on each side of the slide.
+      // 0.8rem total margin per slide. In % this is roughly 1%
+      const translateValue = offset - (currentIndex * (slideWidth + 1)); 
+      track.style.transform = `translateX(${translateValue}%)`;
     
     slides.forEach((slide, i) => {
       slide.classList.toggle('active', i === currentIndex);
