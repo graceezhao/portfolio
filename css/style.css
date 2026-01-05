@@ -751,66 +751,6 @@ textarea {
   to {
     opacity: 0;
     top: 27px; } } */
-  
-    .scroll-indicator {
-      position: absolute;
-      bottom: 3rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      z-index: 10;
-    }
-
-    .scroll-indicator--project {
-      position: relative;
-      bottom: auto;
-      left: auto;
-      transform: none;
-      margin: 4rem 0 2rem 0;
-    }
-
-    .scroll-indicator__text {
-      font-size: 2rem;
-      color: #7E7E7E;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-    }
-
-    .down-arrow {
-      position: relative;
-      width: 16px;
-      height: 16px;
-      color: #7E7E7E;
-      animation: jumpInfinite 1.5s infinite;
-    }
-  
-    .down-arrow:after {
-      content: " ";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 16px;
-      height: 16px;
-      border-bottom: 2px solid;
-      border-right: 2px solid;
-      border-radius: 2px;
-      transform: rotateZ(45deg);
-    }
-
-    @keyframes jumpInfinite {
-      0% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(10px);
-      }
-      100% {
-        transform: translateY(0);
-      }
-    }
     
     .heading-sec__main.heading-sec__main--lt.archive {
   color: grey;
