@@ -171,3 +171,65 @@ if (cursor) {
   const observer = new MutationObserver(updateInteractiveListeners);
   observer.observe(document.body, { childList: true, subtree: true });
 }
+
+// Hero Carousel
+const heroCarousel = document.querySelector('.hero-carousel');
+
+if (heroCarousel) {
+  const track = heroCarousel.querySelector('.hero-carousel__track');
+  const slides = heroCarousel.querySelectorAll('.hero-carousel__slide');
+  const prevBtn = heroCarousel.querySelector('.hero-carousel__btn--prev');
+  const nextBtn = heroCarousel.querySelector('.hero-carousel__btn--next');
+  const dotsContainer = heroCarousel.querySelector('.hero-carousel__dots');
+  
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.classList.add('hero-carousel__dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = dotsContainer.querySelectorAll('.hero-carousel__dot');
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  function goToSlide(index) {
+    currentIndex = index;
+    updateCarousel();
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+
+  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', prevSlide);
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  heroCarousel.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  heroCarousel.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    if (touchStartX - touchEndX > 50) nextSlide();
+    if (touchEndX - touchStartX > 50) prevSlide();
+  });
+}
