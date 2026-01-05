@@ -455,7 +455,7 @@ textarea {
 
     
 .project-details__content {
-  padding: 8rem 0;
+  padding: 2rem 0;
   max-width: 90rem;
   margin: auto; 
   align-items: center;
@@ -835,7 +835,7 @@ a.squiggly:hover {
     }
     .text-primary-bar.standard{
       padding-top: 1rem;
-      padding-bottom: 4rem;
+      padding-bottom: 2rem;
     }
   
 .text-primary-bar {
@@ -964,7 +964,7 @@ a.squiggly:hover {
   width: 120%;
 }
 .project-details-overview__column .project-details__showcase-img.retail-overview {
-  margin-top: 15rem;
+  margin-top: 4rem;
   margin-left: 9rem;
   width: 60%;
 }
@@ -1168,9 +1168,9 @@ a.squiggly:hover {
 .confidential-box {
   background-color: #f5f5f5;
   border-radius: 12px;
-  padding: 3rem;
-  margin: 6rem 0;
-  text-align: center;
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: left;
 }
 
 .confidential-box__text {
