@@ -764,6 +764,14 @@ textarea {
       z-index: 10;
     }
 
+    .scroll-indicator--project {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      transform: none;
+      margin: 4rem 0 2rem 0;
+    }
+
     .scroll-indicator__text {
       font-size: 2rem;
       color: #7E7E7E;
