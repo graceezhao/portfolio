@@ -456,13 +456,13 @@ textarea {
     
 .project-details__content {
   padding: 2rem 0;
-  max-width: 90rem;
+  max-width: 120rem;
   margin: auto; 
   align-items: center;
 }
   @media only screen and (min-width: 112.5em) {
     .project-details__content {
-      max-width: 80rem; } }
+      max-width: 110rem; } }
 
 .project-details__content-title {
     font-weight: 700;
@@ -1314,23 +1314,41 @@ a, button, input, textarea, [role="button"] {
 .hero-carousel {
   position: relative;
   width: 100%;
-  max-width: 90rem;
+  max-width: 120rem;
   margin: 0 auto 6rem auto;
   overflow: hidden;
   border-radius: 8px;
+  height: 40rem;
+  cursor: grab;
+}
+
+.hero-carousel:active {
+  cursor: grabbing;
 }
 
 .hero-carousel__track {
   display: flex;
-  transition: transform 0.4s ease-in-out;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  height: 100%;
+  align-items: center;
 }
 
 .hero-carousel__slide {
-  min-width: 100%;
-  width: 100%;
-  height: auto;
+  min-width: 60%;
+  width: 60%;
+  height: 90%;
   object-fit: cover;
   flex-shrink: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0.4;
+  transform: scale(0.9);
+  border-radius: 8px;
+  margin: 0 1rem;
+}
+
+.hero-carousel__slide.active {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .hero-carousel__btn {

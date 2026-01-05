@@ -177,14 +177,21 @@ const heroCarousel = document.querySelector('.hero-carousel');
 
 if (heroCarousel) {
   const track = heroCarousel.querySelector('.hero-carousel__track');
-  const slides = heroCarousel.querySelectorAll('.hero-carousel__slide');
+  const slides = Array.from(heroCarousel.querySelectorAll('.hero-carousel__slide'));
   const prevBtn = heroCarousel.querySelector('.hero-carousel__btn--prev');
   const nextBtn = heroCarousel.querySelector('.hero-carousel__btn--next');
   const dotsContainer = heroCarousel.querySelector('.hero-carousel__dots');
   
   let currentIndex = 0;
   const totalSlides = slides.length;
+  let isDragging = false;
+  let startX = 0;
+  let scrollLeft = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let animationID = 0;
 
+  // Create dots
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.classList.add('hero-carousel__dot');
@@ -196,7 +203,24 @@ if (heroCarousel) {
   const dots = dotsContainer.querySelectorAll('.hero-carousel__dot');
 
   function updateCarousel() {
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    // Calculate centering offset
+    // Slide width is 60%, container is 100%. 
+    // To center: (100% - 60%) / 2 = 20%
+    const slideWidth = 60; // percent
+    const offset = 20; // percent to center
+    
+    // We also have 1rem margin on each side of the slide.
+    // In many cases, it's easier to just use the slide's bounding rect if we want to be pixel perfect,
+    // but for a simple responsive carousel, percentages are usually fine.
+    // However, 1rem is absolute. Let's try to stick to a consistent approach.
+    
+    const translateValue = offset - (currentIndex * (slideWidth + 2)); // +2 for margins roughly in %
+    track.style.transform = `translateX(${translateValue}%)`;
+    
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentIndex);
+    });
+
     dots.forEach((dot, i) => {
       dot.classList.toggle('active', i === currentIndex);
     });
@@ -220,16 +244,97 @@ if (heroCarousel) {
   nextBtn.addEventListener('click', nextSlide);
   prevBtn.addEventListener('click', prevSlide);
 
-  let touchStartX = 0;
-  let touchEndX = 0;
+  // Mouse / Touch Dragging logic
+  function touchStart(index) {
+    return function(event) {
+      isDragging = true;
+      startX = getPositionX(event);
+      animationID = requestAnimationFrame(animation);
+      track.style.transition = 'none';
+    }
+  }
 
+  function touchEnd() {
+    isDragging = false;
+    cancelAnimationFrame(animationID);
+    track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    
+    const movedBy = currentTranslate - prevTranslate;
+
+    if (movedBy < -100 && currentIndex < totalSlides - 1) currentIndex += 1;
+    if (movedBy > 100 && currentIndex > 0) currentIndex -= 1;
+
+    updateCarousel();
+  }
+
+  function touchMove(event) {
+    if (isDragging) {
+      const currentX = getPositionX(event);
+      currentTranslate = prevTranslate + currentX - startX;
+    }
+  }
+
+  function getPositionX(event) {
+    return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+  }
+
+  function animation() {
+    if (isDragging) {
+      // Manual drag is a bit complex with the centering logic.
+      // For now, let's keep it simple: use the standard buttons/dots for main navigation
+      // and support basic swipe.
+      requestAnimationFrame(animation);
+    }
+  }
+
+  // Simplified Mouse Dragging
+  let isMouseDown = false;
+  let mouseStartX = 0;
+
+  heroCarousel.addEventListener('mousedown', (e) => {
+    isMouseDown = true;
+    mouseStartX = e.pageX;
+    track.style.transition = 'none';
+  });
+
+  heroCarousel.addEventListener('mousemove', (e) => {
+    if (!isMouseDown) return;
+    const x = e.pageX;
+    const walk = x - mouseStartX;
+    // We could visually move the track here, but it conflicts with the percentage-based centering.
+    // Let's implement a threshold-based slide change.
+  });
+
+  heroCarousel.addEventListener('mouseup', (e) => {
+    if (!isMouseDown) return;
+    isMouseDown = false;
+    track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    const x = e.pageX;
+    const dist = x - mouseStartX;
+    if (dist < -50) nextSlide();
+    else if (dist > 50) prevSlide();
+    else updateCarousel();
+  });
+
+  heroCarousel.addEventListener('mouseleave', () => {
+    if (isMouseDown) {
+      isMouseDown = false;
+      updateCarousel();
+    }
+  });
+
+  // Touch support
+  let touchStartX = 0;
   heroCarousel.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
   });
 
   heroCarousel.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
+    const touchEndX = e.changedTouches[0].screenX;
     if (touchStartX - touchEndX > 50) nextSlide();
     if (touchEndX - touchStartX > 50) prevSlide();
   });
+
+  // Initialize
+  updateCarousel();
 }
