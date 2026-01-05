@@ -126,5 +126,31 @@ if (projectDetailsContent) {
   });
 }
 
+const cursor = document.querySelector('.custom-cursor');
 
+// Move cursor
+document.addEventListener('mousemove', e => {
+  cursor.style.top = e.clientY + 'px';
+  cursor.style.left = e.clientX + 'px';
+});
 
+// Shrink on click
+document.addEventListener('mousedown', () => {
+  cursor.classList.add('click');
+});
+
+document.addEventListener('mouseup', () => {
+  cursor.classList.remove('click');
+});
+
+// Expand / color when hovering links
+const interactiveElements = document.querySelectorAll('a, button');
+
+interactiveElements.forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.classList.add('hover');
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.classList.remove('hover');
+  });
+});

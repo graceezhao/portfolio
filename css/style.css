@@ -216,7 +216,7 @@ textarea {
   }
 
 .about {
-  background: #fafafa; 
+  background: #ffffff; 
 }
   .about__content {
     display: flex;
@@ -241,11 +241,12 @@ textarea {
     .about__content-details-para {
       font-size: 1.8rem;
       color: rgb(0, 0, 0);
-      max-width: 60rem;
+      max-width: 80rem;
       line-height: 1.7;
       margin-bottom: 1rem;
       margin-left: auto;
       margin-right: auto;
+      text-align: left;
     }
       .about__content-details-para--hl {
         font-weight: 700;
@@ -584,7 +585,7 @@ textarea {
     transition: color .3s; 
   }
     .header__link:hover {
-      color: rgba(74,82,155,0.9178265056022409); }
+      color: rgba(152, 152, 152, 0.918); }
     .header__link--active {
       text-decoration: underline;
       text-underline-offset: 0.5rem; }
@@ -1077,6 +1078,7 @@ a.squiggly:hover {
   cursor: pointer;
 }
 
+
 /* Custom underline */
 .text-arrow::after {
   content: "";
@@ -1091,9 +1093,11 @@ a.squiggly:hover {
   transition: transform 0.25s ease;
 }
 
+
 .text-arrow:hover::after {
   transform: scaleX(1);
 }
+
 
 .text-underline-link {
   text-decoration: none;
@@ -1210,3 +1214,41 @@ a.squiggly:hover {
   transition-delay: 0.2s;
 }
 
+/* body {
+  cursor: none; 
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(103, 103, 103, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-cursor.click {
+  width: 12px;
+  height: 12px;
+}
+
+.custom-cursor.hover {
+  width: 35px;
+  height: 35px;
+  background-color: rgba(50, 50, 50, 0.5);
+}
+a, button, input, textarea {
+  cursor: none !important;
+} */
+
+.divider {
+  width: 80%;        /* not full width */
+  height: 1px;
+  background-color: #e5e5e5;
+  margin: 6rem auto; /* ← this centers it */
+}
