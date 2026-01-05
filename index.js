@@ -177,49 +177,68 @@ const heroCarousel = document.querySelector('.hero-carousel');
 
 if (heroCarousel) {
   const track = heroCarousel.querySelector('.hero-carousel__track');
-  const slides = Array.from(heroCarousel.querySelectorAll('.hero-carousel__slide'));
+  const originalSlides = Array.from(heroCarousel.querySelectorAll('.hero-carousel__slide'));
   const prevBtn = heroCarousel.querySelector('.hero-carousel__btn--prev');
   const nextBtn = heroCarousel.querySelector('.hero-carousel__btn--next');
   const dotsContainer = heroCarousel.querySelector('.hero-carousel__dots');
   
-  let currentIndex = 0;
-  const totalSlides = slides.length;
-  let isDragging = false;
-  let startX = 0;
-  let scrollLeft = 0;
-  let currentTranslate = 0;
-  let prevTranslate = 0;
-  let animationID = 0;
+  const totalOriginalSlides = originalSlides.length;
+  
+  // Clone slides for infinite loop
+  // We clone all slides once to the beginning and once to the end
+  originalSlides.forEach(slide => {
+    const clone = slide.cloneNode(true);
+    clone.classList.add('hero-carousel__slide--clone');
+    track.appendChild(clone);
+  });
+  
+  originalSlides.reverse().forEach(slide => {
+    const clone = slide.cloneNode(true);
+    clone.classList.add('hero-carousel__slide--clone');
+    track.insertBefore(clone, track.firstChild);
+  });
+  // Restore order for reference if needed
+  originalSlides.reverse();
 
-  // Create dots
-  slides.forEach((_, i) => {
+  const allSlides = Array.from(heroCarousel.querySelectorAll('.hero-carousel__slide'));
+  let currentIndex = totalOriginalSlides; // Start at the first original slide
+  let isTransitioning = false;
+
+  // Create dots based on original slides only
+  originalSlides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.classList.add('hero-carousel__dot');
     if (i === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToSlide(i));
+    dot.addEventListener('click', () => {
+      if (isTransitioning) return;
+      goToSlide(i + totalOriginalSlides);
+    });
     dotsContainer.appendChild(dot);
   });
 
   const dots = dotsContainer.querySelectorAll('.hero-carousel__dot');
 
-    function updateCarousel() {
-      // Calculate centering offset
-      // Slide width is 45%, container is 100%. 
-      // To center: (100% - 45%) / 2 = 27.5%
-      const slideWidth = 45; // percent
-      const offset = 27.5; // percent to center
-      
-      // We also have 0.4rem margin on each side of the slide.
-      // 0.8rem total margin per slide. In % this is roughly 1%
-      const translateValue = offset - (currentIndex * (slideWidth + 1)); 
-      track.style.transform = `translateX(${translateValue}%)`;
+  function updateCarousel(withTransition = true) {
+    const slideWidth = 45; // percent
+    const offset = 27.5; // percent to center
     
-    slides.forEach((slide, i) => {
+    if (withTransition) {
+      track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    } else {
+      track.style.transition = 'none';
+    }
+
+    const translateValue = offset - (currentIndex * (slideWidth + 1)); 
+    track.style.transform = `translateX(${translateValue}%)`;
+    
+    allSlides.forEach((slide, i) => {
       slide.classList.toggle('active', i === currentIndex);
     });
 
+    // Update dots based on equivalent original index
+    const dotIndex = (currentIndex - totalOriginalSlides + totalOriginalSlides) % totalOriginalSlides;
     dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentIndex);
+      dot.classList.toggle('active', i === dotIndex);
     });
   }
 
@@ -229,83 +248,48 @@ if (heroCarousel) {
   }
 
   function nextSlide() {
-    currentIndex = (currentIndex + 1) % totalSlides;
+    if (isTransitioning) return;
+    isTransitioning = true;
+    currentIndex++;
     updateCarousel();
   }
 
   function prevSlide() {
-    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    if (isTransitioning) return;
+    isTransitioning = true;
+    currentIndex--;
     updateCarousel();
   }
+
+  track.addEventListener('transitionend', () => {
+    isTransitioning = false;
+    
+    // Check if we are on a clone and jump to the real slide
+    if (currentIndex >= totalOriginalSlides * 2) {
+      currentIndex = totalOriginalSlides;
+      updateCarousel(false);
+    } else if (currentIndex < totalOriginalSlides) {
+      currentIndex = totalOriginalSlides * 2 - 1;
+      updateCarousel(false);
+    }
+  });
 
   nextBtn.addEventListener('click', nextSlide);
   prevBtn.addEventListener('click', prevSlide);
 
-  // Mouse / Touch Dragging logic
-  function touchStart(index) {
-    return function(event) {
-      isDragging = true;
-      startX = getPositionX(event);
-      animationID = requestAnimationFrame(animation);
-      track.style.transition = 'none';
-    }
-  }
-
-  function touchEnd() {
-    isDragging = false;
-    cancelAnimationFrame(animationID);
-    track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    
-    const movedBy = currentTranslate - prevTranslate;
-
-    if (movedBy < -100 && currentIndex < totalSlides - 1) currentIndex += 1;
-    if (movedBy > 100 && currentIndex > 0) currentIndex -= 1;
-
-    updateCarousel();
-  }
-
-  function touchMove(event) {
-    if (isDragging) {
-      const currentX = getPositionX(event);
-      currentTranslate = prevTranslate + currentX - startX;
-    }
-  }
-
-  function getPositionX(event) {
-    return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-  }
-
-  function animation() {
-    if (isDragging) {
-      // Manual drag is a bit complex with the centering logic.
-      // For now, let's keep it simple: use the standard buttons/dots for main navigation
-      // and support basic swipe.
-      requestAnimationFrame(animation);
-    }
-  }
-
-  // Simplified Mouse Dragging
+  // Simplified Mouse Dragging for Infinite Loop
   let isMouseDown = false;
   let mouseStartX = 0;
 
   heroCarousel.addEventListener('mousedown', (e) => {
+    if (isTransitioning) return;
     isMouseDown = true;
     mouseStartX = e.pageX;
-    track.style.transition = 'none';
-  });
-
-  heroCarousel.addEventListener('mousemove', (e) => {
-    if (!isMouseDown) return;
-    const x = e.pageX;
-    const walk = x - mouseStartX;
-    // We could visually move the track here, but it conflicts with the percentage-based centering.
-    // Let's implement a threshold-based slide change.
   });
 
   heroCarousel.addEventListener('mouseup', (e) => {
     if (!isMouseDown) return;
     isMouseDown = false;
-    track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     const x = e.pageX;
     const dist = x - mouseStartX;
     if (dist < -50) nextSlide();
@@ -323,6 +307,7 @@ if (heroCarousel) {
   // Touch support
   let touchStartX = 0;
   heroCarousel.addEventListener('touchstart', (e) => {
+    if (isTransitioning) return;
     touchStartX = e.changedTouches[0].screenX;
   });
 
@@ -332,6 +317,6 @@ if (heroCarousel) {
     if (touchEndX - touchStartX > 50) prevSlide();
   });
 
-  // Initialize
-  updateCarousel();
+  // Initialize without transition to set initial position
+  updateCarousel(false);
 }
