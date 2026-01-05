@@ -293,7 +293,7 @@ textarea {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 8px;
+    border-radius: 20px;
     transition: transform 0.3s ease;
     transform-origin: center center; }
   .projects__row-img-cont:hover .projects__row-img {
@@ -477,13 +477,14 @@ textarea {
   margin-bottom: 6rem; }
 
 .project-details__showcase-img {
-  width: 100%; }
-
-.project-details__content-main {
   width: 100%;
-  max-width: 120rem;
-  margin: auto; 
-  margin-left: 0rem;
+  border-radius: 20px; }
+
+.retail-final-prototype1 {
+  border: 1px solid #cbc7dd;   /* light purple outline */
+  border-radius: 20px;           /* soft rounded corners */
+  box-shadow: 0 4px 12px rgba(170, 158, 202, 0.1); /* subtle drop shadow */
+  display: inline-block;        /* ensures shadow works around GIF */
 }
   @media only screen and (min-width: 112.5em) {
     .project-details__content-main {
@@ -1341,6 +1342,7 @@ a, button, input, textarea, [role="button"] {
   opacity: 0.4;
   transform: scale(0.9);
   margin: 0 0.4rem;
+  border-radius: 20px;
 }
 
 .hero-carousel__slide.active {
@@ -1407,4 +1409,50 @@ a, button, input, textarea, [role="button"] {
     height: 3rem;
     font-size: 1.4rem;
   }
+}
+.custom-cursor.caption-mode {
+  width: auto !important;
+  height: auto !important;
+  min-width: 120px;
+  min-height: 40px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  backdrop-filter: blur(8px);
+  z-index: 10001;
+}
+
+.cursor-caption {
+  font-size: 1.6rem;
+  color: #222;
+  font-family: 'DM Sans', sans-serif;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-width: 250px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.cursor-caption:empty::before {
+  content: 'Type something...';
+  color: #aaa;
+  font-style: italic;
+}
+
+.cursor-caption::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 2px;
+  animation: cursor-blink 1s infinite;
+  color: #333;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }

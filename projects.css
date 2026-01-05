@@ -18,4 +18,5 @@
     .projects__row-img {
       width: 80%;
       display: block;
-      object-fit: cover; }
+      object-fit: cover;
+      border-radius: 20px; }

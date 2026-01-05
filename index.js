@@ -160,10 +160,51 @@ if (cursor) {
       el.addEventListener('mouseenter', onMouseEnter);
       el.addEventListener('mouseleave', onMouseLeave);
     });
+
+    // Handle image hover for caption
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+      img.removeEventListener('mouseenter', onImageEnter);
+      img.removeEventListener('mouseleave', onImageLeave);
+      img.addEventListener('mouseenter', onImageEnter);
+      img.addEventListener('mouseleave', onImageLeave);
+    });
   };
 
   const onMouseEnter = () => cursor.classList.add('hover');
   const onMouseLeave = () => cursor.classList.remove('hover');
+
+  // Caption logic
+  const captionSpan = document.createElement('span');
+  captionSpan.classList.add('cursor-caption');
+  cursor.appendChild(captionSpan);
+
+  let isCaptionMode = false;
+
+  const onImageEnter = () => {
+    isCaptionMode = true;
+    cursor.classList.add('caption-mode');
+  };
+
+  const onImageLeave = () => {
+    isCaptionMode = false;
+    cursor.classList.remove('caption-mode');
+  };
+
+  window.addEventListener('keydown', e => {
+    if (!isCaptionMode) return;
+
+    if (e.key === 'Backspace') {
+      captionSpan.innerText = captionSpan.innerText.slice(0, -1);
+      e.preventDefault();
+    } else if (e.key === 'Enter') {
+      captionSpan.innerText += '\n';
+      e.preventDefault();
+    } else if (e.key.length === 1) {
+      captionSpan.innerText += e.key;
+      if (e.key === ' ') e.preventDefault();
+    }
+  });
 
   updateInteractiveListeners();
   
