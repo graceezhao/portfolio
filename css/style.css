@@ -1219,13 +1219,8 @@ a.squiggly:hover {
 }
 
 .scroll-visible {
-  opacity: 0.3;
-  transform: translateY(0) scale(1);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.scroll-visible.is-active {
   opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 /* Stagger animations for child elements */
@@ -1245,7 +1240,7 @@ a.squiggly:hover {
   transition-delay: 0.2s;
 }
 
-/* body {
+body {
   cursor: none; 
 }
 
@@ -1253,29 +1248,36 @@ a.squiggly:hover {
   position: fixed;
   top: 0;
   left: 0;
-  width: 20px;
-  height: 20px;
-  background-color: rgba(103, 103, 103, 0.8);
+  width: 24px;
+  height: 24px;
+  background-color: rgba(103, 103, 103, 0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  z-index: 9999;
-  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  z-index: 10000;
+  transition: width 0.25s cubic-bezier(0.25, 0.1, 0.25, 1), 
+              height 0.25s cubic-bezier(0.25, 0.1, 0.25, 1), 
+              background-color 0.25s ease,
+              transform 0.1s ease;
 }
 
 .custom-cursor.click {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%) scale(0.9);
 }
 
 .custom-cursor.hover {
-  width: 35px;
-  height: 35px;
-  background-color: rgba(50, 50, 50, 0.5);
+  width: 48px;
+  height: 48px;
+  background-color: rgba(103, 103, 103, 0.2);
 }
-a, button, input, textarea {
+
+a, button, input, textarea, [role="button"] {
   cursor: none !important;
-} */
+}
 
 .divider {
   width: 80%;        /* not full width */

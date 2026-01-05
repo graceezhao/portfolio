@@ -37,94 +37,133 @@ headerLogoConatiner.addEventListener('click', () => {
   location.href = 'index.html'
 })
 
-// Scroll Visibility & Focus Logic
-function initScrollAnimations() {
+// function FadeInSection(props) {
+//   const [isVisible, setVisible] = React.useState(true);
+//   const domRef = React.useRef();
+//   React.useEffect(() => {
+//     const observer = new IntersectionObserver(entries => {
+//       entries.forEach(entry => setVisible(entry.isIntersecting));
+//     });
+//     observer.observe(domRef.current);
+//     return () => observer.unobserve(domRef.current);
+//   }, []);
+//   return (
+//     <div
+//       className={`fade-in-section ${isVisible ? 'is-visible' : ''}`}
+//       ref={domRef}
+//     >
+//       {props.children}
+//     </div>
+//   );
+// }
+
+// $('input').on('change', function() {
+//   $('body').toggleClass('blue');
+// });
+
+const projects = document.querySelector('.projects');
+
+const observer = new IntersectionObserver(([entry]) => {
+  if (entry.isIntersecting) {
+    projects.classList.add('is-visible');
+  }
+}, { threshold: 0.2 });
+
+observer.observe(projects);
+
+const rows = document.querySelectorAll('.projects__row');
+
+function updateActiveProject() {
   const middleOfViewport = window.innerHeight / 2;
 
-  // Elements to observe for initial fade-in and focus
-  const selectors = [
-    '.projects__row',
-    '.project-cs-hero__content',
-    '.project-details-overview__row',
-    '.project-details__desc',
-    '.project__row',
-    '.project-details__showcase-img-cont',
-    '.project-details__content-title',
-    '.main-footer__lower',
-    '.project-details__desc-para.bolded'
-  ];
+  rows.forEach(row => {
+    const rect = row.getBoundingClientRect();
+    const rowMiddle = rect.top + rect.height / 2;
 
-  const elements = document.querySelectorAll(selectors.join(', '));
+    // distance from viewport center
+    const distance = Math.abs(middleOfViewport - rowMiddle);
 
-  // Intersection Observer for initial fade-in
-  const appearanceObserver = new IntersectionObserver((entries) => {
+    if (distance < rect.height / 2) {  // close enough to center
+      row.classList.add('is-active');
+    } else {
+      row.classList.remove('is-active');
+    }
+  });
+}
+
+// run on scroll + load
+window.addEventListener('scroll', updateActiveProject);
+window.addEventListener('load', updateActiveProject);
+
+// Scroll animations for project detail pages
+const projectDetailsContent = document.querySelector('.project-details__content-main');
+if (projectDetailsContent) {
+  // Select all major content sections that should animate
+  const projectDetailSections = document.querySelectorAll('.project-details-overview__row, .project-details-overview__column, .project-details__desc, .project__row, .project__column, .project-details__showcase-img-cont:not(.uipathimage):not(.healthcareimage), .project-details__desc-para.bolded, .project-details__showcase-img-cont.yxbtimeline, .project-details__showcase-img-cont.yxbinterviewing, .project-details__showcase-img-cont.uipathresearch, .project-details__showcase-img-cont.uipathtesting, .project-details__showcase-img-cont.uipath-prototyping, .project-details__showcase-img-cont.uipath-final-prototype, .project-details__showcase-img-cont.visitsummaries-final-prototype, .project-details__content-title');
+
+  const projectObserverOptions = {
+    threshold: 0.15,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const projectObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('scroll-visible');
         entry.target.classList.remove('scroll-hidden');
-      } else {
-        // Optional: remove scroll-visible when out of view if you want them to fade out
-        // entry.target.classList.remove('scroll-visible');
+        projectObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, projectObserverOptions);
 
-  elements.forEach(el => {
-    el.classList.add('scroll-hidden');
-    appearanceObserver.observe(el);
+  projectDetailSections.forEach((section, index) => {
+    if (section && section.offsetParent !== null) {
+      section.classList.add('scroll-hidden');
+      // Add slight delay based on index for staggered effect
+      section.style.transitionDelay = `${(index % 3) * 0.1}s`;
+      projectObserver.observe(section);
+    }
   });
-
-  // Scroll function for "Focus" effect
-  function updateFocus() {
-    const vh = window.innerHeight;
-    const center = vh / 2;
-
-    elements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      const elCenter = rect.top + rect.height / 2;
-      
-      // Calculate how close the element's center is to the viewport's center
-      const distanceToCenter = Math.abs(center - elCenter);
-      
-      // If the element is near the center, or if it's a large section currently occupying the center
-      const isLargeAndSpanning = rect.top < center && rect.bottom > center;
-      const isCloseToCenter = distanceToCenter < vh * 0.35;
-
-      if (isCloseToCenter || isLargeAndSpanning) {
-        el.classList.add('is-active');
-      } else {
-        el.classList.remove('is-active');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', updateFocus);
-  window.addEventListener('resize', () => {
-    // Update middle of viewport on resize
-    updateFocus();
-  });
-  
-  // Initial check
-  updateFocus();
 }
 
-// Run on load
-window.addEventListener('DOMContentLoaded', initScrollAnimations);
-
-// Custom Cursor
 const cursor = document.querySelector('.custom-cursor');
+
 if (cursor) {
+  // Move cursor
   document.addEventListener('mousemove', e => {
     cursor.style.top = e.clientY + 'px';
     cursor.style.left = e.clientX + 'px';
   });
 
-  document.addEventListener('mousedown', () => cursor.classList.add('click'));
-  document.addEventListener('mouseup', () => cursor.classList.remove('click'));
-
-  const interactiveElements = document.querySelectorAll('a, button');
-  interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  // Shrink/Bounce on click
+  document.addEventListener('mousedown', () => {
+    cursor.classList.add('click');
   });
+
+  document.addEventListener('mouseup', () => {
+    cursor.classList.remove('click');
+  });
+
+  // Expand / color when hovering interactive elements
+  const updateInteractiveListeners = () => {
+    const interactiveElements = document.querySelectorAll('a, button, input, textarea, [role="button"]');
+    
+    interactiveElements.forEach(el => {
+      // Avoid duplicate listeners if this is called multiple times
+      el.removeEventListener('mouseenter', onMouseEnter);
+      el.removeEventListener('mouseleave', onMouseLeave);
+      
+      el.addEventListener('mouseenter', onMouseEnter);
+      el.addEventListener('mouseleave', onMouseLeave);
+    });
+  };
+
+  const onMouseEnter = () => cursor.classList.add('hover');
+  const onMouseLeave = () => cursor.classList.remove('hover');
+
+  updateInteractiveListeners();
+  
+  // Optional: re-run if content changes
+  const observer = new MutationObserver(updateInteractiveListeners);
+  observer.observe(document.body, { childList: true, subtree: true });
 }
