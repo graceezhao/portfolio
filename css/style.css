@@ -241,8 +241,8 @@ textarea {
     }
 
     .about__headshot {
-      width: 8rem;
-      height: 8rem;
+      width: 12rem;
+      height: 12rem;
       border-radius: 50%;
       object-fit: cover;
     }
