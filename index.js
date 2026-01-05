@@ -7,69 +7,53 @@ const headerHamMenuCloseBtn = document.querySelector(
 )
 const headerSmallMenuLinks = document.querySelectorAll('.header__sm-menu-link')
 
-hamMenuBtn.addEventListener('click', () => {
-  if (smallMenu.classList.contains('header__sm-menu--active')) {
-    smallMenu.classList.remove('header__sm-menu--active')
-  } else {
-    smallMenu.classList.add('header__sm-menu--active')
-  }
-  if (headerHamMenuBtn.classList.contains('d-none')) {
-    headerHamMenuBtn.classList.remove('d-none')
-    headerHamMenuCloseBtn.classList.add('d-none')
-  } else {
-    headerHamMenuBtn.classList.add('d-none')
-    headerHamMenuCloseBtn.classList.remove('d-none')
-  }
-})
+if (hamMenuBtn && smallMenu && headerHamMenuBtn && headerHamMenuCloseBtn) {
+  hamMenuBtn.addEventListener('click', () => {
+    if (smallMenu.classList.contains('header__sm-menu--active')) {
+      smallMenu.classList.remove('header__sm-menu--active')
+    } else {
+      smallMenu.classList.add('header__sm-menu--active')
+    }
+    if (headerHamMenuBtn.classList.contains('d-none')) {
+      headerHamMenuBtn.classList.remove('d-none')
+      headerHamMenuCloseBtn.classList.add('d-none')
+    } else {
+      headerHamMenuBtn.classList.add('d-none')
+      headerHamMenuCloseBtn.classList.remove('d-none')
+    }
+  })
+}
 
 for (let i = 0; i < headerSmallMenuLinks.length; i++) {
   headerSmallMenuLinks[i].addEventListener('click', () => {
-    smallMenu.classList.remove('header__sm-menu--active')
-    headerHamMenuBtn.classList.remove('d-none')
-    headerHamMenuCloseBtn.classList.add('d-none')
+    if (smallMenu) smallMenu.classList.remove('header__sm-menu--active')
+    if (headerHamMenuBtn) headerHamMenuBtn.classList.remove('d-none')
+    if (headerHamMenuCloseBtn) headerHamMenuCloseBtn.classList.add('d-none')
   })
 }
 
 // ---
 const headerLogoConatiner = document.querySelector('.header__logo-container')
 
-headerLogoConatiner.addEventListener('click', () => {
-  location.href = 'index.html'
-})
-
-// function FadeInSection(props) {
-//   const [isVisible, setVisible] = React.useState(true);
-//   const domRef = React.useRef();
-//   React.useEffect(() => {
-//     const observer = new IntersectionObserver(entries => {
-//       entries.forEach(entry => setVisible(entry.isIntersecting));
-//     });
-//     observer.observe(domRef.current);
-//     return () => observer.unobserve(domRef.current);
-//   }, []);
-//   return (
-//     <div
-//       className={`fade-in-section ${isVisible ? 'is-visible' : ''}`}
-//       ref={domRef}
-//     >
-//       {props.children}
-//     </div>
-//   );
-// }
-
-// $('input').on('change', function() {
-//   $('body').toggleClass('blue');
-// });
+if (headerLogoConatiner) {
+  headerLogoConatiner.addEventListener('click', () => {
+    // Check if we are in a subdirectory
+    const isInProjects = window.location.pathname.includes('/projects/')
+    location.href = isInProjects ? '../index.html' : 'index.html'
+  })
+}
 
 const projects = document.querySelector('.projects');
 
-const observer = new IntersectionObserver(([entry]) => {
-  if (entry.isIntersecting) {
-    projects.classList.add('is-visible');
-  }
-}, { threshold: 0.2 });
+if (projects) {
+  const observer = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      projects.classList.add('is-visible');
+    }
+  }, { threshold: 0.2 });
 
-observer.observe(projects);
+  observer.observe(projects);
+}
 
 const rows = document.querySelectorAll('.projects__row');
 
@@ -91,9 +75,11 @@ function updateActiveProject() {
   });
 }
 
-// run on scroll + load
-window.addEventListener('scroll', updateActiveProject);
-window.addEventListener('load', updateActiveProject);
+if (rows.length > 0) {
+  // run on scroll + load
+  window.addEventListener('scroll', updateActiveProject);
+  window.addEventListener('load', updateActiveProject);
+}
 
 // Scroll animations for project detail pages
 const projectDetailsContent = document.querySelector('.project-details__content-main');
