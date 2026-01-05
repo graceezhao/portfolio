@@ -228,12 +228,23 @@ textarea {
       .about__content {
         word-wrap: break-word } }
     .about__content-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
       margin-bottom: 3rem; 
       color: black; 
       font-size: 4rem; 
       font-family: DM Serif Text; 
       font-weight: 600; 
       word-wrap: break-word
+    }
+
+    .about__headshot {
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+      object-fit: cover;
     }
       @media only screen and (max-width: 37.5em) {
         .about__content-title {
