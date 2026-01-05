@@ -752,22 +752,38 @@ textarea {
     opacity: 0;
     top: 27px; } } */
   
-    .down-arrow {
+    .scroll-indicator {
       position: absolute;
-      top: calc(95vh - 60px);
-      left: calc(50% - 14px);
-      width: 0;
-      height: 30px;
-      color: grey;
-      /* border: 2px solid; */
-      border-radius: 2px;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      z-index: 10;
+    }
+
+    .scroll-indicator__text {
+      font-size: 2rem;
+      color: #7E7E7E;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+    }
+
+    .down-arrow {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      color: #7E7E7E;
+      animation: jumpInfinite 1.5s infinite;
     }
   
     .down-arrow:after {
       content: " ";
       position: absolute;
-      top: 12px;
-      left: -8px;
+      top: 0;
+      left: 0;
       width: 16px;
       height: 16px;
       border-bottom: 2px solid;
@@ -778,22 +794,17 @@ textarea {
 
     @keyframes jumpInfinite {
       0% {
-        margin-top: 0;
+        transform: translateY(0);
       }
       50% {
-        margin-top: 20px;
+        transform: translateY(10px);
       }
       100% {
-        margin-top: 0;
+        transform: translateY(0);
       }
     }
     
-    .down-arrow {
-      animation: jumpInfinite 1.5s infinite;
-    }
-
-
-.heading-sec__main.heading-sec__main--lt.archive {
+    .heading-sec__main.heading-sec__main--lt.archive {
   color: grey;
   font-size: 2rem;
   font-weight: 400;
@@ -1306,9 +1317,9 @@ body {
   min-width: 120px;
   min-height: 40px;
   padding: 0.8rem 1.6rem;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(79, 79, 79, 0.5);
   color: #fff;
-  border-radius: 0.8rem;
+  border-radius: 1rem;
   font-size: 1.4rem;
   font-weight: 500;
   transform: translate(2rem, -50%); /* Skewed to the right */
@@ -1362,7 +1373,6 @@ a, button, input, textarea, [role="button"] {
   opacity: 0.4;
   transform: scale(0.9);
   margin: 0 0.4rem;
-  border-radius: 2rem;
 }
 
 .hero-carousel__slide.active {
