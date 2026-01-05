@@ -1319,6 +1319,7 @@ a, button, input, textarea, [role="button"] {
   overflow: hidden;
   border-radius: 8px;
   height: 40rem;
+  background-color: #f5f5f5;
   cursor: grab;
 }
 
@@ -1336,7 +1337,7 @@ a, button, input, textarea, [role="button"] {
 .hero-carousel__slide {
   min-width: 60%;
   width: 60%;
-  height: 90%;
+  height: 96%;
   object-fit: cover;
   flex-shrink: 0;
   transition: opacity 0.4s ease, transform 0.4s ease;
