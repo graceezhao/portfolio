@@ -991,6 +991,22 @@ a.squiggly:hover {
 .project-details__showcase-img-cont.uipathtesting{
   width: 80rem;}
 
+.project-details__showcase-img-cont.healthcare-visit-summary {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-bottom: 6rem;
+}
+
+.healthcare-visit-summary img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .project-details__showcase-img-cont.uipathcharacter {
   margin-left: 70%;
   padding-top: 8rem;
