@@ -76,17 +76,34 @@ const rows = document.querySelectorAll('.projects__row');
 function updateActiveProject() {
   const middleOfViewport = window.innerHeight / 2;
 
+  // Handle homepage project rows
   rows.forEach(row => {
     const rect = row.getBoundingClientRect();
     const rowMiddle = rect.top + rect.height / 2;
-
-    // distance from viewport center
     const distance = Math.abs(middleOfViewport - rowMiddle);
 
-    if (distance < rect.height / 2) {  // close enough to center
+    if (distance < rect.height / 2) {
       row.classList.add('is-active');
     } else {
       row.classList.remove('is-active');
+    }
+  });
+
+  // Handle project detail sections
+  const projectDetailSections = document.querySelectorAll('.project-cs-hero__content, .project-details-overview__row, .project-details__desc, .project__row, .project-details__showcase-img-cont:not(.uipathimage):not(.healthcareimage), .project-details__desc-para.bolded, .project-details__showcase-img-cont.yxbtimeline, .project-details__showcase-img-cont.yxbinterviewing, .project-details__showcase-img-cont.uipathresearch, .project-details__showcase-img-cont.uipathtesting, .project-details__showcase-img-cont.uipath-prototyping, .project-details__showcase-img-cont.uipath-final-prototype, .project-details__showcase-img-cont.visitsummaries-final-prototype, .project-details__content-title, .main-footer__lower');
+  
+  projectDetailSections.forEach(section => {
+    // If it's the hero or footer, it might not have scroll-visible but should still be focusable
+    if (section.classList.contains('scroll-visible') || section.classList.contains('project-cs-hero__content') || section.classList.contains('main-footer__lower')) {
+      const rect = section.getBoundingClientRect();
+      const sectionMiddle = rect.top + rect.height / 2;
+      const distance = Math.abs(middleOfViewport - sectionMiddle);
+
+      if (distance < rect.height / 0.8 || (rect.top < middleOfViewport && rect.bottom > middleOfViewport)) {
+        section.classList.add('is-active');
+      } else {
+        section.classList.remove('is-active');
+      }
     }
   });
 }
