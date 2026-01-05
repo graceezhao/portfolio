@@ -84,12 +84,12 @@ if (rows.length > 0) {
 // Scroll animations for project detail pages
 const projectDetailsContent = document.querySelector('.project-details__content-main');
 if (projectDetailsContent) {
-  // Select all major content sections that should animate
-  const projectDetailSections = document.querySelectorAll('.project-details-overview__row, .project-details-overview__column, .project-details__desc, .project__row, .project__column, .project-details__showcase-img-cont:not(.uipathimage):not(.healthcareimage), .project-details__desc-para.bolded, .project-details__showcase-img-cont.yxbtimeline, .project-details__showcase-img-cont.yxbinterviewing, .project-details__showcase-img-cont.uipathresearch, .project-details__showcase-img-cont.uipathtesting, .project-details__showcase-img-cont.uipath-prototyping, .project-details__showcase-img-cont.uipath-final-prototype, .project-details__showcase-img-cont.visitsummaries-final-prototype, .project-details__content-title');
+  // Select ONLY top-level sections to avoid double-hiding parents and children
+  const projectDetailSections = document.querySelectorAll('.project-details-overview__row, .project-details__desc, .project__row, .project-details__showcase-img-cont:not(.uipathimage):not(.healthcareimage)');
 
   const projectObserverOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -100px 0px'
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
   };
 
   const projectObserver = new IntersectionObserver((entries) => {
@@ -103,7 +103,8 @@ if (projectDetailsContent) {
   }, projectObserverOptions);
 
   projectDetailSections.forEach((section, index) => {
-    if (section && section.offsetParent !== null) {
+    if (section) {
+      // Add class immediately so they can be observed
       section.classList.add('scroll-hidden');
       // Add slight delay based on index for staggered effect
       section.style.transitionDelay = `${(index % 3) * 0.1}s`;
