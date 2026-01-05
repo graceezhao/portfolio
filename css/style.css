@@ -254,6 +254,17 @@ textarea {
       .about__content-details-para:last-child {
         margin-bottom: 4rem; }
 
+.about__subtitle {
+  color: #7E7E7E;
+  font-size: 2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  word-wrap: break-word;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
 .about__content-main{
   width: 100%;
 }
