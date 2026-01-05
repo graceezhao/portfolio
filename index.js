@@ -86,43 +86,46 @@ if (rows.length > 0) {
   window.addEventListener('load', updateActiveProject);
 }
 
-// Scroll animations for project detail pages
-const projectDetailsContent = document.querySelector('.project-details__content-main');
-if (projectDetailsContent) {
-  // Select ONLY top-level sections to avoid double-hiding parents and children
-  const projectDetailSections = document.querySelectorAll('.project-details-overview__row, .project-details__desc, .project__row, .project-details__showcase-img-cont:not(.uipathimage):not(.healthcareimage)');
+// Scroll animations for all pages except index.html
+const isIndexPage = window.location.pathname.endsWith('index.html') || 
+                   window.location.pathname.endsWith('/') || 
+                   window.location.pathname === '' ||
+                   (!window.location.pathname.includes('about.html') && !window.location.pathname.includes('/projects/'));
 
-  const projectObserverOptions = {
+if (!isIndexPage) {
+  // Select sections to animate on about.html and project pages
+  const sectionsToAnimate = document.querySelectorAll(
+    '.about__content, .project-details-overview__row, .project-details__desc, .project__row, .project-details__showcase-img-cont:not(.uipathimage):not(.healthcareimage)'
+  );
+
+  const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
   };
 
-  const projectObserver = new IntersectionObserver((entries) => {
+  const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('scroll-visible');
         entry.target.classList.remove('scroll-hidden');
-        projectObserver.unobserve(entry.target);
+        scrollObserver.unobserve(entry.target);
       }
     });
-  }, projectObserverOptions);
+  }, observerOptions);
 
-  projectDetailSections.forEach((section, index) => {
+  sectionsToAnimate.forEach((section, index) => {
     if (section) {
-      // Check if already in viewport to avoid abrupt hiding
       const rect = section.getBoundingClientRect();
       const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
       
       if (!isInViewport) {
         section.classList.add('scroll-hidden');
       } else {
-        // If in viewport, maybe add a slight fade in anyway but don't start at 0 opacity
         section.classList.add('scroll-visible');
       }
       
-      // Add slight delay based on index for staggered effect
       section.style.transitionDelay = `${(index % 3) * 0.1}s`;
-      projectObserver.observe(section);
+      scrollObserver.observe(section);
     }
   });
 }

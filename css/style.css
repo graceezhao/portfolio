@@ -432,7 +432,7 @@ textarea {
       height: unset;
       min-height: unset; } }
   .project-cs-hero__content {
-    padding: 15rem 0 0rem 0;
+    padding: 15rem 0 10rem 0;
     max-width: 110rem;
     width: 92%;
     margin: auto; }
