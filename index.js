@@ -48,44 +48,6 @@ if (headerLogoConatiner) {
   })
 }
 
-const projects = document.querySelector('.projects');
-
-if (projects) {
-  const observer = new IntersectionObserver(([entry]) => {
-    if (entry.isIntersecting) {
-      projects.classList.add('is-visible');
-    }
-  }, { threshold: 0.2 });
-
-  observer.observe(projects);
-}
-
-const rows = document.querySelectorAll('.projects__row');
-
-function updateActiveProject() {
-  const middleOfViewport = window.innerHeight / 2;
-
-  rows.forEach(row => {
-    const rect = row.getBoundingClientRect();
-    const rowMiddle = rect.top + rect.height / 2;
-
-    // distance from viewport center
-    const distance = Math.abs(middleOfViewport - rowMiddle);
-
-    if (distance < rect.height / 2) {  // close enough to center
-      row.classList.add('is-active');
-    } else {
-      row.classList.remove('is-active');
-    }
-  });
-}
-
-if (rows.length > 0) {
-  // run on scroll + load
-  window.addEventListener('scroll', updateActiveProject);
-  window.addEventListener('load', updateActiveProject);
-}
-
 // Scroll animations for project detail pages
 const projectDetailsContent = document.querySelector('.project-details__content-main');
 if (projectDetailsContent) {
