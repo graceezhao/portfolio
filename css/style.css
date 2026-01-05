@@ -1160,12 +1160,40 @@ a.squiggly:hover {
 }
 
 
-.projects {
-  z-index: 1;
-  position: relative;
-  border-top-left-radius: 4rem;
-  border-top-right-radius: 4rem; 
-  padding: 10rem 2rem;
+.projects.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.confidential-box {
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.confidential-box__text {
+  font-size: 1.8rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.confidential-box__link {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.confidential-box__link:hover {
+  color: #777;
+}
+
+.projects__row {
+  opacity: 0.3;                /* default “dimmed” */
+  transform: scale(0.98);       /* subtle shrink */
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .projects__row.is-active {
