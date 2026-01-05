@@ -1,4 +1,9 @@
 // ---
+// Page Reveal Animation
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('page-reveal');
+});
+
 const hamMenuBtn = document.querySelector('.header__main-ham-menu-cont')
 const smallMenu = document.querySelector('.header__sm-menu')
 const headerHamMenuBtn = document.querySelector('.header__main-ham-menu')
@@ -104,8 +109,17 @@ if (projectDetailsContent) {
 
   projectDetailSections.forEach((section, index) => {
     if (section) {
-      // Add class immediately so they can be observed
-      section.classList.add('scroll-hidden');
+      // Check if already in viewport to avoid abrupt hiding
+      const rect = section.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (!isInViewport) {
+        section.classList.add('scroll-hidden');
+      } else {
+        // If in viewport, maybe add a slight fade in anyway but don't start at 0 opacity
+        section.classList.add('scroll-visible');
+      }
+      
       // Add slight delay based on index for staggered effect
       section.style.transitionDelay = `${(index % 3) * 0.1}s`;
       projectObserver.observe(section);
