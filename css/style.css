@@ -627,14 +627,14 @@ strong::before {
 
 .project-cs-hero__content {
   padding: 15rem 0 5rem 0;
-  max-width: 110rem;
+  max-width: 120rem;
   width: 92%;
   margin: auto;
 }
 
 @media only screen and (min-width: 112.5em) {
   .project-cs-hero__content {
-    max-width: 100rem;
+    max-width: 110rem;
     width: 82%;
   }
 }
@@ -1205,8 +1205,20 @@ a.squiggly:hover {
 /* OVERVIEW STYLING  */
 .project-details-overview__column {
   flex: 1;
-  width: 50%;
   text-align: left;
+}
+
+.project-details-overview__column:nth-child(1) {
+  flex: 0 0 55%;
+  width: 55%;
+  padding-right: 4rem;
+}
+
+.project-details-overview__column:nth-child(2) {
+  flex: 0 0 45%;
+  width: 45%;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .project-details-overview__row {
@@ -1337,13 +1349,13 @@ a.squiggly:hover {
 }
 
 .project-details__showcase-img-cont.uipathcharacter {
-  margin-left: 70%;
+  margin-left: 25rem;
   padding-top: 8rem;
   width: 15rem;
 }
 
 .project__column .project-details__desc-para.conclusion {
-  width: 160%;
+  width: 130%;
 }
 
 .project-details__showcase-img .yxb-overview {
@@ -1372,8 +1384,8 @@ a.squiggly:hover {
 
 .project-details-overview__column .project-details__showcase-img.retail-overview {
   margin-top: 2rem;
-  margin-left: 9rem;
-  width: 60%;
+  margin-left: 3rem;
+  width: 50%;
 }
 
 .project-details__showcase-img.spotifyresearch {
@@ -1403,9 +1415,9 @@ a.squiggly:hover {
 }
 
 .project-details__showcase-img-cont.spotifyicon {
-  margin-top: 13rem;
-  margin-left: 30rem;
-  width: 40%;
+  margin-top: 15rem;
+  margin-left: 18rem;
+  width: 30%;
 }
 
 .visitsummaries-final-prototype img {
@@ -1781,15 +1793,16 @@ textarea,
 }
 
 .hero-carousel__slide {
-  min-width: 45%;
-  width: 45%;
+  min-width: auto;
+  width: auto;
   height: 100%;
   object-fit: contain;
   flex-shrink: 0;
   transition: opacity 0.4s ease, transform 0.4s ease;
   opacity: 0.4;
   transform: scale(0.9);
-  margin: 0 0.4rem;
+  margin: 0 1rem;
+  border-radius: 12px;
 }
 
 .hero-carousel__slide.active {
@@ -2026,4 +2039,37 @@ textarea,
   /* Dimmed */
   transform: scale(0.98);
   /* Slightly smaller */
+}
+
+/* Project Overlay Styles */
+.project-overlay-container {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 1.5rem;
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.project-overlay-container:hover .project-overlay {
+  opacity: 1;
+}
+
+.lock-icon {
+  width: 4rem;
+  height: 4rem;
+  fill: #ffffff;
 }

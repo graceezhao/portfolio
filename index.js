@@ -244,17 +244,23 @@ if (heroCarousel) {
   const dots = dotsContainer.querySelectorAll('.hero-carousel__dot');
 
   function updateCarousel(withTransition = true) {
-    const slideWidth = 45; // percent
-    const offset = 27.5; // percent to center
-
     if (withTransition) {
       track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     } else {
       track.style.transition = 'none';
     }
 
-    const translateValue = offset - (currentIndex * (slideWidth + 1));
-    track.style.transform = `translateX(${translateValue}%)`;
+    const activeSlide = allSlides[currentIndex];
+    if (!activeSlide) return;
+
+    // Center the active slide:
+    // Container center - (Slide left position + Slide half width)
+    const containerCenter = heroCarousel.offsetWidth / 2;
+    const slideLeft = activeSlide.offsetLeft;
+    const slideWidth = activeSlide.offsetWidth;
+    const translateValue = containerCenter - (slideLeft + slideWidth / 2);
+
+    track.style.transform = `translateX(${translateValue}px)`;
 
     allSlides.forEach((slide, i) => {
       slide.classList.toggle('active', i === currentIndex);
@@ -266,6 +272,11 @@ if (heroCarousel) {
       dot.classList.toggle('active', i === dotIndex);
     });
   }
+
+  // Recalculate on window resize to maintain centering
+  window.addEventListener('resize', () => updateCarousel(false));
+  // Recalculate when images load (to ensure widths are correct)
+  window.addEventListener('load', () => updateCarousel(false));
 
   function goToSlide(index) {
     currentIndex = index;
