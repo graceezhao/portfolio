@@ -87,10 +87,10 @@ if (rows.length > 0) {
 }
 
 // Scroll animations for all pages except index.html
-const isIndexPage = window.location.pathname.endsWith('index.html') || 
-                   window.location.pathname.endsWith('/') || 
-                   window.location.pathname === '' ||
-                   (!window.location.pathname.includes('about.html') && !window.location.pathname.includes('/projects/'));
+const isIndexPage = window.location.pathname.endsWith('index.html') ||
+  window.location.pathname.endsWith('/') ||
+  window.location.pathname === '' ||
+  (!window.location.pathname.includes('about.html') && !window.location.pathname.includes('/projects/'));
 
 if (!isIndexPage) {
   // Select sections to animate on about.html and project pages
@@ -117,13 +117,13 @@ if (!isIndexPage) {
     if (section) {
       const rect = section.getBoundingClientRect();
       const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
-      
+
       if (!isInViewport) {
         section.classList.add('scroll-hidden');
       } else {
         section.classList.add('scroll-visible');
       }
-      
+
       section.style.transitionDelay = `${(index % 3) * 0.1}s`;
       scrollObserver.observe(section);
     }
@@ -151,12 +151,12 @@ if (cursor) {
   // Expand / color when hovering interactive elements
   const updateInteractiveListeners = () => {
     const interactiveElements = document.querySelectorAll('a, button, input, textarea, [role="button"]');
-    
+
     interactiveElements.forEach(el => {
       // Avoid duplicate listeners if this is called multiple times
       el.removeEventListener('mouseenter', onMouseEnter);
       el.removeEventListener('mouseleave', onMouseLeave);
-      
+
       el.addEventListener('mouseenter', onMouseEnter);
       el.addEventListener('mouseleave', onMouseLeave);
     });
@@ -188,7 +188,7 @@ if (cursor) {
 
   updateInteractiveListeners();
   updateCarouselSlideListeners();
-  
+
   // Optional: re-run if content changes
   const observer = new MutationObserver(() => {
     updateInteractiveListeners();
@@ -206,9 +206,9 @@ if (heroCarousel) {
   const prevBtn = heroCarousel.querySelector('.hero-carousel__btn--prev');
   const nextBtn = heroCarousel.querySelector('.hero-carousel__btn--next');
   const dotsContainer = heroCarousel.querySelector('.hero-carousel__dots');
-  
+
   const totalOriginalSlides = originalSlides.length;
-  
+
   // Clone slides for infinite loop
   // We clone all slides once to the beginning and once to the end
   originalSlides.forEach(slide => {
@@ -216,7 +216,7 @@ if (heroCarousel) {
     clone.classList.add('hero-carousel__slide--clone');
     track.appendChild(clone);
   });
-  
+
   originalSlides.reverse().forEach(slide => {
     const clone = slide.cloneNode(true);
     clone.classList.add('hero-carousel__slide--clone');
@@ -246,16 +246,16 @@ if (heroCarousel) {
   function updateCarousel(withTransition = true) {
     const slideWidth = 45; // percent
     const offset = 27.5; // percent to center
-    
+
     if (withTransition) {
       track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     } else {
       track.style.transition = 'none';
     }
 
-    const translateValue = offset - (currentIndex * (slideWidth + 1)); 
+    const translateValue = offset - (currentIndex * (slideWidth + 1));
     track.style.transform = `translateX(${translateValue}%)`;
-    
+
     allSlides.forEach((slide, i) => {
       slide.classList.toggle('active', i === currentIndex);
     });
@@ -288,7 +288,7 @@ if (heroCarousel) {
 
   track.addEventListener('transitionend', () => {
     isTransitioning = false;
-    
+
     // Check if we are on a clone and jump to the real slide
     if (currentIndex >= totalOriginalSlides * 2) {
       currentIndex = totalOriginalSlides;
@@ -343,5 +343,100 @@ if (heroCarousel) {
   });
 
   // Initialize without transition to set initial position
+  // Initialize without transition to set initial position
   updateCarousel(false);
+}
+
+// Art Modal Logic
+const artModal = document.getElementById('art-modal');
+const artModalImg = document.getElementById('art-modal-img');
+const artImages = document.querySelectorAll('.art-grid__img');
+const artModalClose = document.querySelector('.art-modal__close');
+
+if (artModal && artModalImg && artImages.length > 0) {
+  artImages.forEach(img => {
+    img.addEventListener('click', () => {
+      artModal.style.display = 'flex';
+      artModalImg.src = img.src;
+      // Disable body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  const closeModal = () => {
+    artModal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scroll
+  };
+
+  if (artModalClose) {
+    artModalClose.addEventListener('click', closeModal);
+  }
+
+  // Close on clicking outside the image
+  artModal.addEventListener('click', (e) => {
+    if (e.target === artModal) {
+      closeModal();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && artModal.style.display === 'flex') {
+      closeModal();
+    }
+  });
+}
+
+// Scroll-based Prominence Animation (for all pages except index.html)
+if (!window.location.pathname.endsWith('index.html') &&
+  !window.location.pathname.endsWith('/') &&
+  window.location.pathname !== '') {
+
+  // Select elements to animate
+  const prominenceElements = document.querySelectorAll(
+    '.project-details__content > *, .project-details__showcase-img-cont, .project__row, .about__content-main'
+  );
+
+  if (prominenceElements.length > 0) {
+    const updateProminence = () => {
+      const middleOfViewport = window.innerHeight / 2;
+      const range = window.innerHeight / 2.5; // Active range around center
+
+      prominenceElements.forEach(el => {
+        el.classList.add('scroll-animate'); // Ensure base class is present
+        const rect = el.getBoundingClientRect();
+
+        // Define active zone (center of viewport)
+        const activeZoneTop = middleOfViewport - range;
+        const activeZoneBottom = middleOfViewport + range;
+
+        // Check if element overlaps with active zone
+        // Element overlapping zone if:
+        // rect.bottom > activeZoneTop AND rect.top < activeZoneBottom
+        if (rect.bottom > activeZoneTop && rect.top < activeZoneBottom) {
+          el.classList.add('is-active');
+          el.classList.remove('is-inactive');
+        } else {
+          el.classList.add('is-inactive');
+          el.classList.remove('is-active');
+        }
+      });
+    };
+
+    let isTicking = false;
+
+    const onScroll = () => {
+      if (!isTicking) {
+        window.requestAnimationFrame(() => {
+          updateProminence();
+          isTicking = false;
+        });
+        isTicking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('load', updateProminence); // Initial run
+    updateProminence();
+  }
 }
